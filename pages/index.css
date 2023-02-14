@@ -27,3 +27,6 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
+.element__like_active {
+  background-image: url(../images/like_active.svg);
+}

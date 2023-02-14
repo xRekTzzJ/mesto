@@ -7,6 +7,7 @@ function openPopup() {
 }
 editButton.addEventListener('click', openPopup);
 
+//* закрытие попапа
 function closePopup() {
   popup.classList.remove('popup_opened');
 }
