@@ -5,10 +5,10 @@
   font-weight: 900;
   line-height: 29px;
   font-style: normal;
-  display: flex;
+  display: inline;
   justify-content: space-between;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 250px;
+  max-width: 190px;
   text-overflow: ellipsis;
 }
