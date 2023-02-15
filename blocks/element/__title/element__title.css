@@ -9,7 +9,6 @@
   justify-content: space-between;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 190px;
+  max-width: 250px;
   text-overflow: ellipsis;
-  display: inline-block;
 }
