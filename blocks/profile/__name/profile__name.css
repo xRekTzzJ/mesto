@@ -5,16 +5,13 @@
   line-height: 48px;
   margin: 0;
   padding: 0;
-  display: flex;
-  gap: 18px;
-  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 350px;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
-@media screen and (max-width: 775px) {
-  .profile__name {
-    gap: 10px;
-  }
-}
 @media screen and (max-width: 450px) {
   .profile__name {
     font-size: 27px;

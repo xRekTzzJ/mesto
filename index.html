@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
+    <script src="./scripts/index.js" defer></script>
   </head>
   <body class="body">
     <div class="page">
@@ -14,11 +15,11 @@
       <section class="profile">
         <img src="./images/avatar.png" alt="" class="profile__avatar" />
         <div class="profile__info">
-          <h1 class="profile__name">
-            Жак-Ив Кусто
+          <div class="profile__name-container">
+            <h1 id="userName" class="profile__name"></h1>
             <img src="./images/edit-button.svg" alt="" class="profile__edit-button" />
-          </h1>
-          <p class="profile__subtitle">Исследователь океана</p>
+          </div>
+          <p id="userOccupation" class="profile__subtitle"></p>
         </div>
         <button class="profile__add-button"></button>
       </section>
@@ -73,14 +74,13 @@
         <div class="popup__container">
           <img src="./images/close-icon.svg" alt="" class="popup__close-icon" />
           <h2 class="popup__title">Редактировать профиль</h2>
-          <div class="popup__form">
-            <input type="text" placeholder="Имя" class="popup__input" />
-            <input type="text" placeholder="О себе" class="popup__input" />
-          </div>
-          <h2 class="popup__submit-button">Сохранить</h2>
+          <form action="#" class="popup__form">
+            <input id="userNameInput" type="text" placeholder="Имя" class="popup__input" />
+            <input id="userOccupationInput" type="text" placeholder="О себе" class="popup__input" />
+            <button type="submit" class="popup__submit-button">Сохранить</button>
+          </form>
         </div>
       </section>
     </div>
-    <script src="./scripts/components/popup.js"></script>
   </body>
 </html>

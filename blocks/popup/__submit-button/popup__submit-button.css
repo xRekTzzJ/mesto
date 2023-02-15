@@ -5,7 +5,7 @@
   background-color: #000000;
   color: #ffffff;
   display: flex;
-  margin: 0 0 37px;
+  margin: 18px 0 37px;
   padding: 0;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@
 @media screen and (max-width: 530px) {
   .popup__submit-button {
     width: calc(100% - 44px);
-    margin: 0 auto 25px;
+    margin: 15px auto 25px;
     font-size: 14px;
     line-height: 17px;
   }
