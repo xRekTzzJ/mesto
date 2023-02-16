@@ -8,10 +8,13 @@
   cursor: pointer;
   background-color: transparent;
   background-image: url(../../../images/close-icon.svg);
-  background-size: cover;
   object-fit: cover;
   transition: 0.3s;
   border: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .popup__close-icon:hover {
   opacity: 0.6;
