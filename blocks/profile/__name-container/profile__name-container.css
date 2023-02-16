@@ -3,7 +3,6 @@
   padding: 0;
   display: flex;
   gap: 18px;
-  display: flex;
   align-items: center;
 }
 @media screen and (max-width: 775px) {
