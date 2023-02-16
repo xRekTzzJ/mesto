@@ -10,7 +10,7 @@
   background-image: url(../../../images/close-icon.svg);
   transition: 0.3s;
   border: 0;
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 .popup__close-icon:hover {
   opacity: 0.6;
@@ -18,9 +18,9 @@
 
 @media screen and (max-width: 630px) {
   .popup__close-icon {
+    background-image: url(../../../images/close-icon-mobile.svg);
     right: 0;
     width: 20px;
     height: 20px;
-    background-image: url(../../../images/close-icon-mobile.svg);
   }
 }
