@@ -30,10 +30,12 @@
             class="profile__add-button"
             type="button"
             aria-label="Добавить карточку с местом"
+            id="addButton"
           ></button>
         </section>
         <section class="elements">
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/karachevsk.jpg" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Карачевск</h2>
@@ -41,6 +43,7 @@
             </div>
           </div>
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/elbrus.png" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Гора Эльбрус</h2>
@@ -48,6 +51,7 @@
             </div>
           </div>
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/dombay.png" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Домбай</h2>
@@ -55,6 +59,7 @@
             </div>
           </div>
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/elbrus.png" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Гора Эльбрус</h2>
@@ -62,6 +67,7 @@
             </div>
           </div>
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/dombay.png" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Домбай</h2>
@@ -69,6 +75,7 @@
             </div>
           </div>
           <div class="element">
+            <div class="element__trash"></div>
             <img src="./images/karachevsk.jpg" alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title">Карачаево-Черкессия</h2>
@@ -78,13 +85,16 @@
         </section>
       </main>
       <footer class="footer">
-        <h3 class="footer__copy-right">&COPY; 2023 Mesto Russia</h3>
+        <h3 class="footer__copy-right">&COPY; 2023 Mesto Russia </h3>
       </footer>
-      <section class="popup">
+      <section class="popup"
+      id="editPopup">
         <div class="popup__container">
           <button
             class="popup__close-icon"
+            itemid="editPopupCloseButton"
             type="button"
+            id="editPopupCloseButton"
             aria-label="Закрыть окно редактирования профиля"
           ></button>
           <h2 class="popup__title">Редактировать профиль</h2>
@@ -100,6 +110,40 @@
               id="userOccupationInput"
               type="text"
               placeholder="О себе"
+              class="popup__input"
+              name="popup-input-occupation"
+            />
+            <button
+              type="submit"
+              class="popup__submit-button"
+              aria-label="Сохранить и обновить информацию профиля"
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </section>
+      <section class="popup" id="addPopup">
+        <div class="popup__container">
+          <button
+            class="popup__close-icon"
+            type="button"
+            aria-label="Закрыть окно редактирования профиля"
+            id="addPopupCloseButton"
+          ></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form action="#" class="popup__form" name="popup-from">
+            <input
+              id="userNameInput"
+              type="text"
+              placeholder="Навзание"
+              class="popup__input"
+              name="popup-input-name"
+            />
+            <input
+              id="userOccupationInput"
+              type="text"
+              placeholder="Ссылка на картинку"
               class="popup__input"
               name="popup-input-occupation"
             />
