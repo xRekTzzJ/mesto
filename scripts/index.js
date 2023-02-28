@@ -48,6 +48,8 @@ function createElement(element){
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
   const deleteButton = elementTemplate.querySelector('.element__trash')
+  const likeButton = elementTemplate.querySelector('.element__like')
+  likeButton.addEventListener('click', handleLikeButtonClicj)
   deleteButton.addEventListener('click', handleDeleteButtonClick) 
   elements.prepend(elementTemplate);
 }
@@ -100,4 +102,10 @@ function handleDeleteButtonClick(evt){
   const deleteButton = evt.target
   const element = deleteButton.closest('.element')
   element.remove();
+}
+//* Поставить лайк
+function handleLikeButtonClicj(evt){
+  const likeButton = evt.target
+  const element = likeButton.closest('.element')
+  likeButton.classList.toggle('element__like_active')
 }
