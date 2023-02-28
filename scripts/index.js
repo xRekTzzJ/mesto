@@ -9,6 +9,42 @@ let userOccupation = document.querySelector('#userOccupation');
 let formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('#userNameInput');
 let occupationInput = document.querySelector('#userOccupationInput');
+const elements = document.querySelector('.elements')
+//* Контент карточек
+const initialElements = [
+  {
+    name: 'Архыз',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
+initialElements.forEach(function(element){
+  const elementTemplate = document.getElementById('elementTemplate').content.cloneNode(true)
+  const elementTitle = elementTemplate.querySelector('.element__title');
+  const elementImage = elementTemplate.querySelector('.element__image');
+  elementTitle.textContent = element.name;
+  elementImage.setAttribute('src', element.image);
+  elements.append(elementTemplate);
+})
 //* Открытие едит попапа
 function openEditPopup() {
   editPopup.classList.add('popup_opened');

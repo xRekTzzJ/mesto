@@ -34,54 +34,16 @@
           ></button>
         </section>
         <section class="elements">
+          <template id="elementTemplate">
           <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/karachevsk.jpg" alt="Изображение карточки" class="element__image" />
+            <button class="element__trash" type="button" aria-label="Удалить карточку"></button>
+            <img alt="Изображение карточки" class="element__image" />
             <div class="element__bottom-block">
-              <h2 class="element__title">Карачевск</h2>
+              <h2 class="element__title"></h2>
               <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
             </div>
           </div>
-          <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/elbrus.png" alt="Изображение карточки" class="element__image" />
-            <div class="element__bottom-block">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
-            </div>
-          </div>
-          <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/dombay.png" alt="Изображение карточки" class="element__image" />
-            <div class="element__bottom-block">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
-            </div>
-          </div>
-          <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/elbrus.png" alt="Изображение карточки" class="element__image" />
-            <div class="element__bottom-block">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
-            </div>
-          </div>
-          <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/dombay.png" alt="Изображение карточки" class="element__image" />
-            <div class="element__bottom-block">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
-            </div>
-          </div>
-          <div class="element">
-            <div class="element__trash"></div>
-            <img src="./images/karachevsk.jpg" alt="Изображение карточки" class="element__image" />
-            <div class="element__bottom-block">
-              <h2 class="element__title">Карачаево-Черкессия</h2>
-              <button class="element__like" type="button" aria-label="Поставить реакцию"></button>
-            </div>
-          </div>
+        </template>
         </section>
       </main>
       <footer class="footer">
@@ -117,6 +79,7 @@
               type="submit"
               class="popup__submit-button"
               aria-label="Сохранить и обновить информацию профиля"
+              id="addSubmit"
             >
               Сохранить
             </button>
@@ -150,7 +113,7 @@
             <button
               type="submit"
               class="popup__submit-button"
-              aria-label="Сохранить и обновить информацию профиля"
+              aria-label="Сохранить и добавить карточку"
             >
               Сохранить
             </button>
