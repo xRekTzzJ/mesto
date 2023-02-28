@@ -10,6 +10,10 @@ let formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('#userNameInput');
 let occupationInput = document.querySelector('#userOccupationInput');
 const elements = document.querySelector('.elements')
+const cardImageInput = document.querySelector('#cardImageInput')
+const cardNameInput = document.querySelector('#cardNameInput');
+const addCardSubmit = document.querySelector('#addCardSubmit')
+let addForm = document.querySelector('#addForm');
 //* Контент карточек
 const initialElements = [
   {
@@ -37,14 +41,15 @@ const initialElements = [
     image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ]; 
-initialElements.forEach(function(element){
+function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.cloneNode(true)
   const elementTitle = elementTemplate.querySelector('.element__title');
   const elementImage = elementTemplate.querySelector('.element__image');
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
-  elements.append(elementTemplate);
-})
+  elements.prepend(elementTemplate);
+}
+initialElements.forEach(createElement);
 //* Открытие едит попапа
 function openEditPopup() {
   editPopup.classList.add('popup_opened');
@@ -68,6 +73,8 @@ formElement.addEventListener('submit', handleFormSubmit);
 //*Открытия попапа добавления карточек
 function openAddPopup() {
   addPopup.classList.add('popup_opened');
+  cardNameInput.value='';
+  cardImageInput.value='';
 };
 addButton.addEventListener('click', openAddPopup);
 //*Закрытие попапа добавления карточек
@@ -75,4 +82,14 @@ function closeAddPopup() {
   addPopup.classList.remove('popup_opened');
 }
 addPopupCloseButton.addEventListener('click', closeAddPopup);
-//*Добавление карточки
+//* Добавления карточки по нажатию кнопки 'Сохранить'
+function handleAddSubmit(evt) {
+  evt.preventDefault();
+  const addNewCard = {
+    name: cardNameInput.value,
+    image: cardImageInput.value,
+  }
+  createElement(addNewCard);
+  closeAddPopup();
+}
+addForm.addEventListener('submit', handleAddSubmit);
