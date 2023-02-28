@@ -2,7 +2,7 @@ const editPopup = document.querySelector('#editPopup');
 let addPopup = document.querySelector('#addPopup')
 let addButton = document.querySelector('#addButton');
 let editButton = document.querySelector('.profile__edit-button');
-let editPopupcloseButton = document.querySelector('#editPopupCloseButton');
+let editPopupСloseButton = document.querySelector('#editPopupCloseButton');
 const addPopupCloseButton = document.querySelector('#addPopupCloseButton')
 let userName = document.querySelector('#userName');
 let userOccupation = document.querySelector('#userOccupation');
@@ -47,6 +47,8 @@ function createElement(element){
   const elementImage = elementTemplate.querySelector('.element__image');
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
+  const deleteButton = elementTemplate.querySelector('.element__trash')
+  deleteButton.addEventListener('click', handleDeleteButtonClick) 
   elements.prepend(elementTemplate);
 }
 initialElements.forEach(createElement);
@@ -61,7 +63,7 @@ editButton.addEventListener('click', openEditPopup);
 function closeEditPopup() {
   editPopup.classList.remove('popup_opened');
 }
-editPopupcloseButton.addEventListener('click', closeEditPopup);
+editPopupСloseButton.addEventListener('click', closeEditPopup);
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -93,3 +95,9 @@ function handleAddSubmit(evt) {
   closeAddPopup();
 }
 addForm.addEventListener('submit', handleAddSubmit);
+//*Удалить карточку
+function handleDeleteButtonClick(evt){
+  const deleteButton = evt.target
+  const element = deleteButton.closest('.element')
+  element.remove();
+}
