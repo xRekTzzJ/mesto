@@ -1,4 +1,4 @@
-let editPopup = document.querySelector('#editPopup');
+const editPopup = document.querySelector('#editPopup');
 let addPopup = document.querySelector('#addPopup')
 let addButton = document.querySelector('#addButton');
 let editButton = document.querySelector('.profile__edit-button');
