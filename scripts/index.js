@@ -14,6 +14,9 @@ const cardImageInput = document.querySelector('#cardImageInput')
 const cardNameInput = document.querySelector('#cardNameInput');
 const addCardSubmit = document.querySelector('#addCardSubmit')
 let addForm = document.querySelector('#addForm');
+const imagePopupCloseButton = document.querySelector('#imagePopupCloseButton')
+const imagePopup = document.querySelector('.image-popup');
+
 //* Контент карточек
 const initialElements = [
   {
@@ -47,6 +50,13 @@ function createElement(element){
   const elementImage = elementTemplate.querySelector('.element__image');
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
+  elementImage.addEventListener('click', function(){
+    const imageForImagePopup = document.querySelector('.image-popup__image')
+    imageForImagePopup.setAttribute('src', element.image)
+    const titleForImagePopup = document.querySelector('.image-popup__title')
+    titleForImagePopup.textContent = element.name
+    imagePopup.classList.add('image-popup_opened')
+  })
   const deleteButton = elementTemplate.querySelector('.element__trash')
   const likeButton = elementTemplate.querySelector('.element__like')
   likeButton.addEventListener('click', handleLikeButtonClicj)
@@ -109,3 +119,7 @@ function handleLikeButtonClicj(evt){
   const element = likeButton.closest('.element')
   likeButton.classList.toggle('element__like_active')
 }
+//* Закрытие попапа просмотра фотографии
+imagePopupCloseButton.addEventListener('click', function(){
+  imagePopup.classList.remove('image-popup_opened')
+})
