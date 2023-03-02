@@ -15,7 +15,7 @@ const cardNameInput = document.querySelector('#cardNameInput');
 const addCardSubmit = document.querySelector('#addCardSubmit')
 let addForm = document.querySelector('#addForm');
 const imagePopupCloseButton = document.querySelector('#imagePopupCloseButton')
-const imagePopup = document.querySelector('.image-popup');
+const imagePopup = document.querySelector('.popup_image');
 
 //* Контент карточек
 const initialElements = [
@@ -51,11 +51,11 @@ function createElement(element){
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
   elementImage.addEventListener('click', function(){
-    const imageForImagePopup = document.querySelector('.image-popup__image')
+    const imageForImagePopup = document.querySelector('.popup__image')
     imageForImagePopup.setAttribute('src', element.image)
-    const titleForImagePopup = document.querySelector('.image-popup__title')
+    const titleForImagePopup = document.querySelector('.popup__description')
     titleForImagePopup.textContent = element.name
-    imagePopup.classList.add('image-popup_opened')
+    imagePopup.classList.add('popup_opened')
   })
   const deleteButton = elementTemplate.querySelector('.element__trash')
   const likeButton = elementTemplate.querySelector('.element__like')
@@ -121,5 +121,5 @@ function handleLikeButtonClicj(evt){
 }
 //* Закрытие попапа просмотра фотографии
 imagePopupCloseButton.addEventListener('click', function(){
-  imagePopup.classList.remove('image-popup_opened')
+  imagePopup.classList.remove('popup_opened')
 })
