@@ -1,22 +1,22 @@
 const editPopup = document.querySelector('#editPopup');
-let addPopup = document.querySelector('#addPopup')
-let addButton = document.querySelector('#addButton');
-let editButton = document.querySelector('.profile__edit-button');
-let editPopupСloseButton = document.querySelector('#editPopupCloseButton');
-const addPopupCloseButton = document.querySelector('#addPopupCloseButton')
-let userName = document.querySelector('#userName');
-let userOccupation = document.querySelector('#userOccupation');
-let formElement = document.querySelector('.popup__form');
-let nameInput = document.querySelector('#userNameInput');
-let occupationInput = document.querySelector('#userOccupationInput');
+const addPopup = document.querySelector('#addPopup')
+const addButton = document.querySelector('#addButton');
+const editButton = document.querySelector('.profile__edit-button');
+const buttonClosePopupProfile = document.querySelector('#editPopupCloseButton');//* editPopupСloseButton
+const buttonCloseAddPopup= document.querySelector('#addPopupCloseButton')// *addPopupCloseButton
+const userName = document.querySelector('#userName');
+const userOccupation = document.querySelector('#userOccupation');
+const formElement = document.querySelector('.popup__form');
+const nameInput = document.querySelector('#userNameInput');
+const occupationInput = document.querySelector('#userOccupationInput');
 const elements = document.querySelector('.elements')
 const cardImageInput = document.querySelector('#cardImageInput')
 const cardNameInput = document.querySelector('#cardNameInput');
-const addCardSubmit = document.querySelector('#addCardSubmit')
-let addForm = document.querySelector('#addForm');
-const imagePopupCloseButton = document.querySelector('#imagePopupCloseButton')
+const addForm = document.querySelector('#addForm');
+const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')//* imagePopupCloseButton
 const imagePopup = document.querySelector('.popup_image');
-
+const descriptionCardPopup = document.querySelector('.popup__description')
+const imageCardPopup = document.querySelector('.popup__image')
 //* Контент карточек
 const initialElements = [
   {
@@ -45,17 +45,15 @@ const initialElements = [
   }
 ]; 
 function createElement(element){
-  const elementTemplate = document.getElementById('elementTemplate').content.cloneNode(true)
+  const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
   const elementTitle = elementTemplate.querySelector('.element__title');
   const elementImage = elementTemplate.querySelector('.element__image');
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
   elementImage.addEventListener('click', function(){
-    const imageForImagePopup = document.querySelector('.popup__image')
-    imageForImagePopup.setAttribute('src', element.image)
-    const titleForImagePopup = document.querySelector('.popup__description')
-    titleForImagePopup.textContent = element.name
-    imagePopup.classList.add('popup_opened')
+  imageCardPopup.setAttribute('src', element.image)
+  descriptionCardPopup.textContent = element.name
+  imagePopup.classList.add('popup_opened')
   })
   const deleteButton = elementTemplate.querySelector('.element__trash')
   const likeButton = elementTemplate.querySelector('.element__like')
@@ -75,7 +73,7 @@ editButton.addEventListener('click', openEditPopup);
 function closeEditPopup() {
   editPopup.classList.remove('popup_opened');
 }
-editPopupСloseButton.addEventListener('click', closeEditPopup);
+buttonClosePopupProfile.addEventListener('click', closeEditPopup);
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -95,7 +93,7 @@ addButton.addEventListener('click', openAddPopup);
 function closeAddPopup() {
   addPopup.classList.remove('popup_opened');
 }
-addPopupCloseButton.addEventListener('click', closeAddPopup);
+buttonCloseAddPopup.addEventListener('click', closeAddPopup);
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -120,6 +118,11 @@ function handleLikeButtonClicj(evt){
   likeButton.classList.toggle('element__like_active')
 }
 //* Закрытие попапа просмотра фотографии
-imagePopupCloseButton.addEventListener('click', function(){
+buttonCloseImagePopup.addEventListener('click', function(){
   imagePopup.classList.remove('popup_opened')
 })
+//*
+const popup = document.querySelector('.popup');
+function openPopup(){
+  popup.classList.add('popup_opened')
+}
