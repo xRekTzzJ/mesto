@@ -18,6 +18,14 @@ const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
 const imageCardPopup = document.querySelector('.popup__image')
 const popup = document.querySelector('.popup');
+//*
+function open(popupName){
+  popupName.classList.add('popup_opened')
+}
+function close(popupName){
+  popupName.classList.remove('popup_opened')
+}
+//*
 function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
   const elementTitle = elementTemplate.querySelector('.element__title');
@@ -27,7 +35,7 @@ function createElement(element){
   elementImage.addEventListener('click', function(){
   imageCardPopup.setAttribute('src', element.image)
   descriptionCardPopup.textContent = element.name
-  imagePopup.classList.add('popup_opened')
+  open(imagePopup)
   })
   const deleteButton = elementTemplate.querySelector('.element__trash')
   const likeButton = elementTemplate.querySelector('.element__like')
@@ -38,36 +46,34 @@ function createElement(element){
 initialElements.forEach(createElement);
 //* Открытие едит попапа
 function openEditPopup() {
-  editPopup.classList.add('popup_opened');
+  open(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
 }
 editButton.addEventListener('click', openEditPopup);
 //* Закрытие едит попапа
-function closeEditPopup() {
-  editPopup.classList.remove('popup_opened');
-}
-buttonClosePopupProfile.addEventListener('click', closeEditPopup);
+buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
+  close(editPopup)
+});
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userOccupation.textContent = occupationInput.value;
-  closeEditPopup();
+  close(editPopup);
 }
 formElement.addEventListener('submit', handleFormSubmit);
 //*Открытия попапа добавления карточек
 function openAddPopup() {
-  addPopup.classList.add('popup_opened');
+  open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
 };
 addButton.addEventListener('click', openAddPopup);
 //*Закрытие попапа добавления карточек
-function closeAddPopup() {
-  addPopup.classList.remove('popup_opened');
-}
-buttonCloseAddPopup.addEventListener('click', closeAddPopup);
+buttonCloseAddPopup.addEventListener('click', function closeAddPopup() {
+  close(addPopup)
+});
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -93,6 +99,5 @@ function handleLikeButtonClicj(evt){
 }
 //* Закрытие попапа просмотра фотографии
 buttonCloseImagePopup.addEventListener('click', function(){
-  imagePopup.classList.remove('popup_opened')
+  close(imagePopup)
 })
-//*
