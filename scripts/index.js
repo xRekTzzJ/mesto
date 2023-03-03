@@ -82,7 +82,7 @@ function handleAddSubmit(evt) {
     image: cardImageInput.value,
   }
   createElement(addNewCard);
-  closeAddPopup();
+  close(addPopup)
 }
 addForm.addEventListener('submit', handleAddSubmit);
 //*Удалить карточку
