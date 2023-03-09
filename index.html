@@ -96,24 +96,34 @@
             id="addPopupCloseButton"
           ></button>
           <h2 class="popup__title">Новое место</h2>
-          <form action="#" class="popup__form" name="popup-from" id="addForm">
+          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm" novalidate>
+            <div class="popup__field">
             <input
               id="cardNameInput"
               type="text"
               placeholder="Навзание"
-              class="popup__input"
+              class="popup__input popup__input_error"
               name="popup-input-name"
+              minlength="1"
+              required
             />
+            <span class="popup__error">Вы пропустили это поле.</span>
+          </div>
+          <div class="popup__field">
             <input
               id="cardImageInput"
-              type="text"
+              type="url"
               placeholder="Ссылка на картинку"
-              class="popup__input"
+              class="popup__input popup__input_error"
               name="popup-input-occupation"
+              minlength="4"
+              required
             />
+            <span class="popup__error">Введите адрес сайта.</span>
+          </div>
             <button
               type="submit"
-              class="popup__submit-button"
+              class="popup__submit-button popup__submit-button_inactive"
               aria-label="Сохранить и добавить карточку"
               id="addCardSubmit"
             >
