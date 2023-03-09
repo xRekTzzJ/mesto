@@ -63,20 +63,32 @@
           ></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form action="#" class="popup__form" name="popup-from">
+            <div class="popup__field"> 
             <input
               id="userNameInput"
               type="text"
               placeholder="Имя"
               class="popup__input"
               name="popup-input-name"
+              required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="popup__error">Заполните это поле.</span>
+            </div>
+            <div class="popup__field">
             <input
               id="userOccupationInput"
               type="text"
               placeholder="О себе"
               class="popup__input"
               name="popup-input-occupation"
+              required
+              minlength="2"
+              maxlength="200"
             />
+            <span class="popup__error">Заполните это поле.</span>
+            </div>
             <button
               type="submit"
               class="popup__submit-button"
@@ -98,7 +110,7 @@
             id="addPopupCloseButton"
           ></button>
           <h2 class="popup__title">Новое место</h2>
-          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm" novalidate>
+          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm">
             <div class="popup__field">
             <input
               id="cardNameInput"
@@ -110,7 +122,7 @@
               maxlength="30"
               required
             />
-            <span class="popup__error">Вы пропустили это поле.</span>
+            <span class="popup__error">Заполните это поле.</span>
           </div>
           <div class="popup__field">
             <input
@@ -121,7 +133,7 @@
               name="popup-input-occupation"
               required
             />
-            <span class="popup__error">Введите адрес сайта.</span>
+            <span class="popup__error">Введите URL.</span>
           </div>
             <button
               type="submit"
