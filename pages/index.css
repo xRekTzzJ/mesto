@@ -56,6 +56,8 @@
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
+    opacity: 0;
+    visibility: hidden;
   }
   .popup__input_error{
     border-bottom: 1px solid #FF0000;
@@ -68,4 +70,12 @@
     flex-direction: column;
     margin: -2px 0 0;
     padding: 0;
+  }
+  .popup__hide-overlay{
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    opacity: 0;
   }

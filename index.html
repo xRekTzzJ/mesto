@@ -52,6 +52,7 @@
       </footer>
       <div class="popup popup_form"
       id="editPopup">
+      <div class="popup__hide-overlay" id="hideOverlayEditPopup"></div>
         <div class="popup__container">
           <button
             class="popup__close-icon"
@@ -88,6 +89,7 @@
         </div>
       </div>
       <div class="popup popup_form" id="addPopup">
+        <div class="popup__hide-overlay" id="hideOverlayAddPopup"></div>
         <div class="popup__container">
           <button
             class="popup__close-icon"
@@ -102,9 +104,10 @@
               id="cardNameInput"
               type="text"
               placeholder="Навзание"
-              class="popup__input popup__input_error"
+              class="popup__input"
               name="popup-input-name"
-              minlength="1"
+              minlength="2"
+              maxlength="30"
               required
             />
             <span class="popup__error">Вы пропустили это поле.</span>
@@ -114,16 +117,15 @@
               id="cardImageInput"
               type="url"
               placeholder="Ссылка на картинку"
-              class="popup__input popup__input_error"
+              class="popup__input"
               name="popup-input-occupation"
-              minlength="4"
               required
             />
             <span class="popup__error">Введите адрес сайта.</span>
           </div>
             <button
               type="submit"
-              class="popup__submit-button popup__submit-button_inactive"
+              class="popup__submit-button"
               aria-label="Сохранить и добавить карточку"
               id="addCardSubmit"
             >
@@ -133,6 +135,7 @@
         </div>
       </div>
       <div class="popup popup_image">
+        <div class="popup__hide-overlay" id="hideOverlayImagePopup"></div>
         <div class="popup__card">
           <button
             class="popup__close-icon"

@@ -17,7 +17,10 @@ const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')//*
 const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
 const imageCardPopup = document.querySelector('.popup__image')
-const popup = document.querySelector('.popup');
+const overlay =  document.querySelector('.popup');
+const overlayPopupAdd = document.querySelector('#hideOverlayAddPopup')
+const overlayPopupimage = document.querySelector('#hideOverlayImagePopup')
+const overlayPopupEdit = document.querySelector('#hideOverlayEditPopup')
 //*
 function open(popupName){
   popupName.classList.add('popup_opened')
@@ -25,6 +28,11 @@ function open(popupName){
 function close(popupName){
   popupName.classList.remove('popup_opened')
 }
+//*Закрытие попапа по клику на оверлей
+function closeOverlay (hideOverlayName,nameOverlay){
+  hideOverlayName.addEventListener('click', function(){
+  close(nameOverlay)
+})}
 //*
 function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
@@ -39,7 +47,7 @@ function createElement(element){
   })
   const deleteButton = elementTemplate.querySelector('.element__trash')
   const likeButton = elementTemplate.querySelector('.element__like')
-  likeButton.addEventListener('click', handleLikeButtonClicj)
+  likeButton.addEventListener('click', handleLikeButtonClick)
   deleteButton.addEventListener('click', handleDeleteButtonClick) 
   elements.prepend(elementTemplate);
 }
@@ -55,6 +63,7 @@ editButton.addEventListener('click', openEditPopup);
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
   close(editPopup)
 });
+closeOverlay(overlayPopupEdit, editPopup)
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -71,9 +80,10 @@ function openAddPopup() {
 };
 addButton.addEventListener('click', openAddPopup);
 //*Закрытие попапа добавления карточек
-buttonCloseAddPopup.addEventListener('click', function closeAddPopup() {
+buttonCloseAddPopup.addEventListener('click', function() {
   close(addPopup)
 });
+closeOverlay(overlayPopupAdd, addPopup);
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -92,7 +102,7 @@ function handleDeleteButtonClick(evt){
   element.remove();
 }
 //* Поставить лайк
-function handleLikeButtonClicj(evt){
+function handleLikeButtonClick(evt){
   const likeButton = evt.target
   const element = likeButton.closest('.element')
   likeButton.classList.toggle('element__like_active')
@@ -101,3 +111,4 @@ function handleLikeButtonClicj(evt){
 buttonCloseImagePopup.addEventListener('click', function(){
   close(imagePopup)
 })
+closeOverlay(overlayPopupimage, imagePopup);
