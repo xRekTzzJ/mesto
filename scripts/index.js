@@ -18,9 +18,9 @@ const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
 const imageCardPopup = document.querySelector('.popup__image')
 const overlay =  document.querySelector('.popup');
-const overlayPopupAdd = document.querySelector('#hideOverlayAddPopup')
-const overlayPopupimage = document.querySelector('#hideOverlayImagePopup')
-const overlayPopupEdit = document.querySelector('#hideOverlayEditPopup')
+const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
+const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
+const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
 //*
 function open(popupName){
   popupName.classList.add('popup_opened')
@@ -33,6 +33,15 @@ function closeOverlay (hideOverlayName,nameOverlay){
   hideOverlayName.addEventListener('click', function(){
   close(nameOverlay)
 })}
+//*  Закрытие попапа на клавишу ESC
+function closingByEsc(popupName){
+  document.addEventListener('keydown', function(evt){
+    if (evt.key === 'Escape'){
+      close(popupName)
+    }
+  })
+}
+
 //*
 function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
@@ -63,7 +72,8 @@ editButton.addEventListener('click', openEditPopup);
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
   close(editPopup)
 });
-closeOverlay(overlayPopupEdit, editPopup)
+closeOverlay(overlayHiddenPopupEdit, editPopup);
+closingByEsc(editPopup);
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -83,7 +93,8 @@ addButton.addEventListener('click', openAddPopup);
 buttonCloseAddPopup.addEventListener('click', function() {
   close(addPopup)
 });
-closeOverlay(overlayPopupAdd, addPopup);
+closeOverlay(overlayHiddenPopupAdd, addPopup);
+closingByEsc(addPopup)
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -111,4 +122,5 @@ function handleLikeButtonClick(evt){
 buttonCloseImagePopup.addEventListener('click', function(){
   close(imagePopup)
 })
-closeOverlay(overlayPopupimage, imagePopup);
+closeOverlay(overlayHiddenPopupimage, imagePopup);
+closingByEsc(imagePopup)
