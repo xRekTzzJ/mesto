@@ -1,12 +1,14 @@
 
 
-const showInputError = (errorTextElement, validationMessage, activeErrorClass) => {
+const showInputError = (errorTextElement, validationMessage, activeErrorClass, activeErrorInputClass, input) => {
     errorTextElement.textContent = validationMessage;
     errorTextElement.classList.add(activeErrorClass);
+    input.classList.add(activeErrorInputClass);
 }
 
-const hideInputError = (errorTextElement, activeErrorClass) => {
+const hideInputError = (errorTextElement, activeErrorClass, activeErrorInputClass, input) => {
     errorTextElement.classList.remove(activeErrorClass);
+    input.classList.remove(activeErrorInputClass);
 }
 
 const disableButton = (submitButton, inactiveSubmitButtonClass) => {
@@ -19,13 +21,13 @@ const enableButton = (submitButton, inactiveSubmitButtonClass) => {
     submitButton.disabled = false;
 };
 
-const checkInputValidity = (input, errorClassTemplate, activeErrorClass) => {
+const checkInputValidity = (input, errorClassTemplate, activeErrorClass, activeErrorInputClass) => {
     const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
  if(!input.validity.valid){
-    showInputError(errorTextElement, input.validationMessage, activeErrorClass);
+    showInputError(errorTextElement, input.validationMessage, activeErrorClass, activeErrorInputClass, input);
  }
  else{
-    hideInputError(errorTextElement, activeErrorClass);
+    hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
  }
 }
 
@@ -42,31 +44,36 @@ else{
 }
 }
 
-const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, inactiveSubmitButtonClass, submitButton) => {
+const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, inactiveSubmitButtonClass, activeErrorInputClass,submitButton) => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
     });
 
     inputList.forEach((input) => {
         input.addEventListener('input', (evt) => {
-            checkInputValidity(input, errorClassTemplate, activeErrorClass);
+            checkInputValidity(input, errorClassTemplate, activeErrorClass, activeErrorInputClass);
             toggleButtonState(submitButton, inactiveSubmitButtonClass, inputList);
         });
      });
 }
 
 const enableValidation = (config) => {
-    const form = document.querySelector(config.formSelector);
-    const inputList = form.querySelectorAll(config.inputSelector);
-    const submitButton = form.querySelector(config.submitButtonSelector);
-    setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, config.inactiveSubmitButtonClass, submitButton)
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
+    formList.forEach((form) => {
+        const inputList = form.querySelectorAll(config.inputSelector);
+        const submitButton = form.querySelector(config.submitButtonSelector);
+        setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, config.inactiveSubmitButtonClass, config.activeErrorInputClass ,submitButton)
+    })
 }
 
-enableValidation({
-formSelector: '.popup__form',
-inputSelector: '.popup__input',
-errorClassTemplate: '.popup__input-error_type_',
-activeErrorClass: 'popup__input-error_active',
-submitButtonSelector: '.popup__submit-button',
-inactiveSubmitButtonClass: 'popup__submit-button_inactive'
-});
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    errorClassTemplate: '.popup__input-error_type_',
+    activeErrorClass: 'popup__input-error_active',
+    activeErrorInputClass: 'popup__input_error',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveSubmitButtonClass: 'popup__submit-button_inactive',
+}
+enableValidation(validationConfig);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

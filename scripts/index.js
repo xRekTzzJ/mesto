@@ -89,6 +89,7 @@ function openAddPopup() {
   open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
+
 };
 addButton.addEventListener('click', openAddPopup);
 //*Закрытие попапа добавления карточек
