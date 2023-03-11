@@ -62,13 +62,7 @@ function createElement(element){
   elements.prepend(elementTemplate);
 }
 initialElements.forEach(createElement);
-//* Открытие едит попапа
-function openEditPopup() {
-  open(editPopup)
-  nameInput.value = userName.textContent;
-  occupationInput.value = userOccupation.textContent;
-}
-editButton.addEventListener('click', openEditPopup);
+
 
 //* Закрытие едит попапа
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
@@ -84,14 +78,6 @@ function handleFormSubmit(evt) {
   close(editPopup);
 }
 formElement.addEventListener('submit', handleFormSubmit);
-//*Открытия попапа добавления карточек
-function openAddPopup() {
-  open(addPopup)
-  cardNameInput.value='';
-  cardImageInput.value='';
-
-};
-addButton.addEventListener('click', openAddPopup);
 //*Закрытие попапа добавления карточек
 buttonCloseAddPopup.addEventListener('click', function() {
   close(addPopup)

@@ -55,6 +55,23 @@ const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass
             toggleButtonState(submitButton, inactiveSubmitButtonClass, inputList);
         });
      });
+
+     //* Открытие едит попапа
+  editButton.addEventListener('click', function openEditPopup(){
+    open(editPopup)
+    nameInput.value = userName.textContent;
+    occupationInput.value = userOccupation.textContent;
+    enableButton(submitButton, inactiveSubmitButtonClass);
+  });
+  
+
+  //*Открытия попапа добавления карточек
+  addButton.addEventListener('click', function openAddPopup(){
+    open(addPopup)
+    cardNameInput.value='';
+    cardImageInput.value='';
+    disableButton(submitButton, inactiveSubmitButtonClass);
+  });
 }
 
 const enableValidation = (config) => {
@@ -62,6 +79,8 @@ const enableValidation = (config) => {
     formList.forEach((form) => {
         const inputList = form.querySelectorAll(config.inputSelector);
         const submitButton = form.querySelector(config.submitButtonSelector);
+        const inactiveSubmitButtonClass = config.inactiveSubmitButtonClass;
+        toggleButtonState(submitButton, inactiveSubmitButtonClass, inputList);
         setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, config.inactiveSubmitButtonClass, config.activeErrorInputClass ,submitButton)
     })
 }
