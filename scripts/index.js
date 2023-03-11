@@ -6,7 +6,6 @@ const buttonClosePopupProfile = document.querySelector('#editPopupCloseButton');
 const buttonCloseAddPopup= document.querySelector('#addPopupCloseButton')// *addPopupCloseButton
 const userName = document.querySelector('#userName');
 const userOccupation = document.querySelector('#userOccupation');
-const formElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('#userNameInput');
 const occupationInput = document.querySelector('#userOccupationInput');
 const elements = document.querySelector('.elements')
@@ -21,9 +20,12 @@ const overlay =  document.querySelector('.popup');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
+////////////////////////// <<<<<---- !VALIDATE! ---->>>>> ////////////////////////// 
+const formElement = document.querySelector('.popup__form');
+////////////////////////// <<<<<---- !end! ---->>>>> ////////////////////////// 
 //*
 function open(popupName){
-  popupName.classList.add('popup_opened')
+  popupName.classList.add('popup_opened');
 }
 function close(popupName){
   popupName.classList.remove('popup_opened')
@@ -42,7 +44,6 @@ function closingByEsc(popupName){
   })
 }
 
-//*
 function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
   const elementTitle = elementTemplate.querySelector('.element__title');
@@ -68,6 +69,7 @@ function openEditPopup() {
   occupationInput.value = userOccupation.textContent;
 }
 editButton.addEventListener('click', openEditPopup);
+
 //* Закрытие едит попапа
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
   close(editPopup)

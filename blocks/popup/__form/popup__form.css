@@ -3,7 +3,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 9px;/*26*/
 }
 
 @media screen and (max-width: 530px) {
