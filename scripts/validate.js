@@ -45,10 +45,12 @@ else{
 }
 
 const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, inactiveSubmitButtonClass, activeErrorInputClass,submitButton) => {
-    form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-    });
-
+const resetValidation = () => {
+    inputList.forEach((input) => {
+        const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
+        hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
+    })
+}
     inputList.forEach((input) => {
         input.addEventListener('input', (evt) => {
             checkInputValidity(input, errorClassTemplate, activeErrorClass, activeErrorInputClass);
@@ -62,6 +64,7 @@ const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass
     nameInput.value = userName.textContent;
     occupationInput.value = userOccupation.textContent;
     enableButton(submitButton, inactiveSubmitButtonClass);
+    resetValidation();
   });
   
 
@@ -71,6 +74,7 @@ const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass
     cardNameInput.value='';
     cardImageInput.value='';
     disableButton(submitButton, inactiveSubmitButtonClass);
+    resetValidation();
   });
 }
 
