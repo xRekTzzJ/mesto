@@ -17,15 +17,16 @@ const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')//*
 const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
 const imageCardPopup = document.querySelector('.popup__image')
-const overlay =  document.querySelector('.popup');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
 function open(popupName){
   popupName.classList.add('popup_opened');
+  closingByEsc(popupName);
 }
 function close(popupName){
   popupName.classList.remove('popup_opened')
+  closingByEsc.remove;
 }
 //*Закрытие попапа по клику на оверлей
 function closeOverlay (hideOverlayName,nameOverlay){
@@ -47,8 +48,10 @@ function createElement(element){
   const elementImage = elementTemplate.querySelector('.element__image');
   elementTitle.textContent = element.name;
   elementImage.setAttribute('src', element.image);
+  elementImage.setAttribute('alt', 'изображение карточки');
   elementImage.addEventListener('click', function(){
-  imageCardPopup.setAttribute('src', element.image)
+  imageCardPopup.setAttribute('src', element.image);
+  imageCardPopup.setAttribute('alt', 'изображение карточки');
   descriptionCardPopup.textContent = element.name
   open(imagePopup)
   })
@@ -60,13 +63,23 @@ function createElement(element){
 }
 initialElements.forEach(createElement);
 
+editButton.addEventListener('click', function openEditPopup(){
+  open(editPopup)
+  nameInput.value = userName.textContent;
+  occupationInput.value = userOccupation.textContent;
+});
+addButton.addEventListener('click', function openAddPopup(){
+  open(addPopup)
+  cardNameInput.value='';
+  cardImageInput.value='';
+
+});
 
 //* Закрытие едит попапа
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
   close(editPopup)
 });
 closeOverlay(overlayHiddenPopupEdit, editPopup);
-closingByEsc(editPopup);
 //* Изменение имени и статуса пользователя через формы
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -80,7 +93,6 @@ buttonCloseAddPopup.addEventListener('click', function() {
   close(addPopup)
 });
 closeOverlay(overlayHiddenPopupAdd, addPopup);
-closingByEsc(addPopup)
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -109,4 +121,3 @@ buttonCloseImagePopup.addEventListener('click', function(){
   close(imagePopup)
 })
 closeOverlay(overlayHiddenPopupimage, imagePopup);
-closingByEsc(imagePopup)
