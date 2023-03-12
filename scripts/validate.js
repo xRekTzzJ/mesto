@@ -3,24 +3,19 @@ const showInputError = (errorTextElement, validationMessage, activeErrorClass, a
     errorTextElement.classList.add(activeErrorClass);
     input.classList.add(activeErrorInputClass);
 }
-
 const hideInputError = (errorTextElement, activeErrorClass, activeErrorInputClass, input) => {
     errorTextElement.classList.remove(activeErrorClass);
     input.classList.remove(activeErrorInputClass);
 }
-
 const disableButton = (submitButton, inactiveSubmitButtonClass) => {
     submitButton.classList.add(inactiveSubmitButtonClass);
     submitButton.disabled = true;
 };
-
 const enableButton = (submitButton, inactiveSubmitButtonClass) => {
     submitButton.classList.remove(inactiveSubmitButtonClass);
     submitButton.disabled = false;
 };
-
-const checkInputValidity = (input, errorClassTemplate, activeErrorClass, activeErrorInputClass) => {
-    const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
+const checkInputValidity = (input, errorTextElement, activeErrorClass, activeErrorInputClass) => {
  if(!input.validity.valid){
     showInputError(errorTextElement, input.validationMessage, activeErrorClass, activeErrorInputClass, input);
  }
@@ -28,7 +23,6 @@ const checkInputValidity = (input, errorClassTemplate, activeErrorClass, activeE
     hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
  }
 }
-
 const hasInvalidInput = (inputList) => {
     return Array.from(inputList).some((input) => !input.validity.valid);
 }
@@ -41,41 +35,26 @@ else{
     disableButton(submitButton, inactiveSubmitButtonClass);
 }
 }
-
 const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, inactiveSubmitButtonClass, activeErrorInputClass,submitButton) => {
 const resetValidation = () => {
     inputList.forEach((input) => {
         const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
         hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
-    })
-}
-    inputList.forEach((input) => {
         input.addEventListener('input', (evt) => {
-            checkInputValidity(input, errorClassTemplate, activeErrorClass, activeErrorInputClass);
+            checkInputValidity(input, errorTextElement, activeErrorClass, activeErrorInputClass);
             toggleButtonState(submitButton, inactiveSubmitButtonClass, inputList);
         });
      });
-
-     //* Открытие едит попапа
-  editButton.addEventListener('click', function openEditPopup(){
-    open(editPopup)
-    nameInput.value = userName.textContent;
-    occupationInput.value = userOccupation.textContent;
+}
+  editButton.addEventListener('click', function (){
     enableButton(submitButton, inactiveSubmitButtonClass);
     resetValidation();
   });
-  
-
-  //*Открытие попапа добавления карточек
-  addButton.addEventListener('click', function openAddPopup(){
-    open(addPopup)
-    cardNameInput.value='';
-    cardImageInput.value='';
+  addButton.addEventListener('click', function (){
     disableButton(submitButton, inactiveSubmitButtonClass);
     resetValidation();
   });
 }
-
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((form) => {
@@ -86,7 +65,6 @@ const enableValidation = (config) => {
         setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, config.inactiveSubmitButtonClass, config.activeErrorInputClass ,submitButton)
     })
 }
-
 const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
