@@ -9,4 +9,8 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border: 0;
+    transition: .2s;
+}
+.element__trash:hover{
+    opacity: .6;
 }

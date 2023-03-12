@@ -8,6 +8,8 @@
     color: #FF0000;
     opacity: 0;
     visibility: hidden;
+    min-height: 30px;
+    height: 100%;
   }
   @media screen and (max-width: 530px) {
     .popup__input-error{

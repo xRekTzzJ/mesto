@@ -72,7 +72,6 @@ addButton.addEventListener('click', function openAddPopup(){
   open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
-
 });
 
 //* Закрытие едит попапа
