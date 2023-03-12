@@ -63,7 +63,7 @@
             aria-label="Закрыть окно редактирования профиля"
           ></button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form action="#" class="popup__form" name="popup-from" novalidate>
+          <form action="#" class="popup__form" name="popup-from" novalidate id="editForm">
             <div class="popup__field"> 
             <input
               id="userNameInput"
@@ -111,12 +111,12 @@
             id="addPopupCloseButton"
           ></button>
           <h2 class="popup__title">Новое место</h2>
-          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm">
+          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm" novalidate>
             <div class="popup__field">
             <input
               id="cardNameInput"
               type="text"
-              placeholder="Навзание"
+              placeholder="Назвавние"
               class="popup__input"
               name="new"
               minlength="2"

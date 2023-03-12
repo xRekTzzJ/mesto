@@ -1,5 +1,3 @@
-
-
 const showInputError = (errorTextElement, validationMessage, activeErrorClass, activeErrorInputClass, input) => {
     errorTextElement.textContent = validationMessage;
     errorTextElement.classList.add(activeErrorClass);
@@ -68,7 +66,7 @@ const resetValidation = () => {
   });
   
 
-  //*Открытия попапа добавления карточек
+  //*Открытие попапа добавления карточек
   addButton.addEventListener('click', function openAddPopup(){
     open(addPopup)
     cardNameInput.value='';
@@ -99,4 +97,3 @@ const validationConfig = {
     inactiveSubmitButtonClass: 'popup__submit-button_inactive',
 }
 enableValidation(validationConfig);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

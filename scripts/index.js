@@ -12,6 +12,7 @@ const elements = document.querySelector('.elements')
 const cardImageInput = document.querySelector('#cardImageInput')
 const cardNameInput = document.querySelector('#cardNameInput');
 const addForm = document.querySelector('#addForm');
+const editForm = document.querySelector('#editForm')
 const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')//* imagePopupCloseButton
 const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
@@ -20,10 +21,6 @@ const overlay =  document.querySelector('.popup');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
-////////////////////////// <<<<<---- !VALIDATE! ---->>>>> ////////////////////////// 
-const formElement = document.querySelector('.popup__form');
-////////////////////////// <<<<<---- !end! ---->>>>> ////////////////////////// 
-//*
 function open(popupName){
   popupName.classList.add('popup_opened');
 }
@@ -77,7 +74,7 @@ function handleFormSubmit(evt) {
   userOccupation.textContent = occupationInput.value;
   close(editPopup);
 }
-formElement.addEventListener('submit', handleFormSubmit);
+editForm.addEventListener('submit', handleFormSubmit);
 //*Закрытие попапа добавления карточек
 buttonCloseAddPopup.addEventListener('click', function() {
   close(addPopup)
