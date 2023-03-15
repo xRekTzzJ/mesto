@@ -22,11 +22,13 @@ const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
 function open(popupName){
   popupName.classList.add('popup_opened');
-  closingByEsc(popupName);
+  //добавить слушатель 
+  document.addEventListener('keydown', closingByEsc);
 }
 function close(popupName){
   popupName.classList.remove('popup_opened')
-  closingByEsc.remove;
+  //удалить слушатель
+  document.removeEventListener('keydown', closingByEsc);
 }
 //*Закрытие попапа по клику на оверлей
 function closeOverlay (hideOverlayName,nameOverlay){
@@ -34,13 +36,12 @@ function closeOverlay (hideOverlayName,nameOverlay){
   close(nameOverlay)
 })}
 //*  Закрытие попапа на клавишу ESC
-function closingByEsc(popupName){
-  document.addEventListener('keydown', function(evt){
+function closingByEsc(evt){
     if (evt.key === 'Escape'){
-      close(popupName)
+      const openedPopup = document.querySelector('.popup_opened');
+      close(openedPopup);
     }
-  })
-}
+  }
 //функция создания карточки и установки слушателей
 function createElement(element){
   const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
