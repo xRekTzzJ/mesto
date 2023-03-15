@@ -36,7 +36,6 @@ else{
 }
 }
 const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, inactiveSubmitButtonClass, activeErrorInputClass,submitButton) => {
-const resetValidation = () => {
     inputList.forEach((input) => {
         const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
         hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
@@ -45,15 +44,6 @@ const resetValidation = () => {
             toggleButtonState(submitButton, inactiveSubmitButtonClass, inputList);
         });
      });
-}
-  editButton.addEventListener('click', function (){
-    enableButton(submitButton, inactiveSubmitButtonClass);
-    resetValidation();
-  });
-  addButton.addEventListener('click', function (){
-    disableButton(submitButton, inactiveSubmitButtonClass);
-    resetValidation();
-  });
 }
 const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -74,4 +64,3 @@ const validationConfig = {
     submitButtonSelector: '.popup__submit-button',
     inactiveSubmitButtonClass: 'popup__submit-button_inactive',
 }
-enableValidation(validationConfig);

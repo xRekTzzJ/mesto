@@ -73,11 +73,13 @@ editButton.addEventListener('click', function openEditPopup(){
   open(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
+  enableValidation(validationConfig);
 });
 addButton.addEventListener('click', function openAddPopup(){
   open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
+  enableValidation(validationConfig);
 });
 
 //* Закрытие едит попапа
