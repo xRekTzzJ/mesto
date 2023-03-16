@@ -20,6 +20,8 @@ const imageCardPopup = document.querySelector('.popup__image')
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
+const buttonSubmitEditPopup = document.querySelector('#addSubmit')//нйти кнопку сабмита едит попапа
+const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')//найти кнопку сабмита попапа добавления карточки
 function open(popupName){
   popupName.classList.add('popup_opened');
   //добавить слушатель 
@@ -73,13 +75,13 @@ editButton.addEventListener('click', function openEditPopup(){
   open(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
-  enableValidation(validationConfig);
+  enableButton(buttonSubmitEditPopup)
 });
 addButton.addEventListener('click', function openAddPopup(){
   open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
-  enableValidation(validationConfig);
+  disableButton(buttonSubmitAddPopup)
 });
 
 //* Закрытие едит попапа
