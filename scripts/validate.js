@@ -7,14 +7,13 @@ const hideInputError = (errorTextElement, activeErrorClass, activeErrorInputClas
     errorTextElement.classList.remove(activeErrorClass);
     input.classList.remove(activeErrorInputClass);
 }
-//Убрал добавление класса через конфиг, чтобы была возможность вызова функции блокировки кнопки в функции открытия попапа добавления карточек
-const disableButton = (submitButton) => {
-    submitButton.classList.add('popup__submit-button_inactive');
+//изменил принцип поиска и передачи класса отключенной кнопки. теперь класс берется напрямую из конфига
+const disableButton = (submitButton, validationConfig) => {
+    submitButton.classList.add(validationConfig.inactiveSubmitButtonClass);
     submitButton.disabled = true;
 };
-//Убрал удаление класса через конфиг, чтобы была возможность вызова функции разблокировки кнопки в функции открытия попапа редактирования профиля
-const enableButton = (submitButton) => {
-    submitButton.classList.remove('popup__submit-button_inactive');
+const enableButton = (submitButton, validationConfig) => {
+    submitButton.classList.remove(validationConfig.inactiveSubmitButtonClass);
     submitButton.disabled = false;
 };
 const checkInputValidity = (input, errorTextElement, activeErrorClass, activeErrorInputClass) => {
@@ -29,21 +28,21 @@ const hasInvalidInput = (inputList) => {
     return Array.from(inputList).some((input) => !input.validity.valid);
 }
 
-const toggleButtonState = (submitButton, /*inactiveSubmitButtonClass,*/ inputList) => {
+const toggleButtonState = (submitButton, inputList) => {
 if(!hasInvalidInput(inputList)){
-    enableButton(submitButton);
+    enableButton(submitButton, validationConfig);
 }
 else{
-    disableButton(submitButton);
+    disableButton(submitButton, validationConfig);
 }
 }
-const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, /*inactiveSubmitButtonClass,*/ activeErrorInputClass,submitButton) => {
+const setEventListeners = (form, inputList, errorClassTemplate, activeErrorClass, activeErrorInputClass,submitButton) => {
     inputList.forEach((input) => {
         const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
         hideInputError(errorTextElement, activeErrorClass, activeErrorInputClass, input);
         input.addEventListener('input', (evt) => {
             checkInputValidity(input, errorTextElement, activeErrorClass, activeErrorInputClass);
-            toggleButtonState(submitButton, /*inactiveSubmitButtonClass,*/ inputList);
+            toggleButtonState(submitButton, inputList);
         });
      });
 }
@@ -52,9 +51,8 @@ const enableValidation = (config) => {
     formList.forEach((form) => {
         const inputList = form.querySelectorAll(config.inputSelector);
         const submitButton = form.querySelector(config.submitButtonSelector);
-        //const inactiveSubmitButtonClass = config.inactiveSubmitButtonClass;
-        toggleButtonState(submitButton, /*inactiveSubmitButtonClass,*/ inputList);
-        setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, /*config.inactiveSubmitButtonClass,*/ config.activeErrorInputClass ,submitButton)
+        toggleButtonState(submitButton, inputList);
+        setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, config.activeErrorInputClass ,submitButton)
     })
 }
 const validationConfig = {
@@ -64,6 +62,6 @@ const validationConfig = {
     activeErrorClass: 'popup__input-error_active',
     activeErrorInputClass: 'popup__input_error',
     submitButtonSelector: '.popup__submit-button',
-    //inactiveSubmitButtonClass: 'popup__submit-button_inactive',
+    inactiveSubmitButtonClass: 'popup__submit-button_inactive',
 }
 enableValidation(validationConfig);

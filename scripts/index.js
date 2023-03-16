@@ -75,13 +75,13 @@ editButton.addEventListener('click', function openEditPopup(){
   open(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
-  enableButton(buttonSubmitEditPopup)
+  enableButton(buttonSubmitEditPopup, validationConfig)
 });
 addButton.addEventListener('click', function openAddPopup(){
   open(addPopup)
   cardNameInput.value='';
   cardImageInput.value='';
-  disableButton(buttonSubmitAddPopup)
+  disableButton(buttonSubmitAddPopup, validationConfig)
 });
 
 //* Закрытие едит попапа
