@@ -7,7 +7,6 @@ const hideInputError = (errorTextElement, activeErrorClass, activeErrorInputClas
     errorTextElement.classList.remove(activeErrorClass);
     input.classList.remove(activeErrorInputClass);
 }
-//изменил принцип поиска и передачи класса отключенной кнопки. теперь класс берется напрямую из конфига
 const disableButton = (submitButton, validationConfig) => {
     submitButton.classList.add(validationConfig.inactiveSubmitButtonClass);
     submitButton.disabled = true;

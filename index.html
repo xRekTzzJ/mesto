@@ -5,9 +5,8 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <script src="./scripts/initialElements.js" defer> </script>
     <script src="./scripts/validate.js" defer></script>
-    <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/index.js" type="module" defer></script>
   </head>
   <body class="body">
     <div class="page">
@@ -39,7 +38,7 @@
           <template id="elementTemplate">
           <div class="element">
             <button class="element__trash" type="button" aria-label="Удалить карточку"></button>
-            <img alt="Изображение карточки" class="element__image" />
+            <img class="element__image" />
             <div class="element__bottom-block">
               <h2 class="element__title"></h2>
               <button class="element__like" type="button" aria-label="Поставить реакцию"></button>

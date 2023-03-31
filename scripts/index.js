@@ -1,9 +1,11 @@
+import {Card} from './Card.js'
+
 const editPopup = document.querySelector('#editPopup');
 const addPopup = document.querySelector('#addPopup');
 const addButton = document.querySelector('#addButton');
 const editButton = document.querySelector('.profile__edit-button');
-const buttonClosePopupProfile = document.querySelector('#editPopupCloseButton');//* editPopupСloseButton
-const buttonCloseAddPopup= document.querySelector('#addPopupCloseButton')// *addPopupCloseButton
+const buttonClosePopupProfile = document.querySelector('#editPopupCloseButton');
+const buttonCloseAddPopup= document.querySelector('#addPopupCloseButton')
 const userName = document.querySelector('#userName');
 const userOccupation = document.querySelector('#userOccupation');
 const nameInput = document.querySelector('#userNameInput');
@@ -13,63 +15,33 @@ const cardImageInput = document.querySelector('#cardImageInput')
 const cardNameInput = document.querySelector('#cardNameInput');
 const addForm = document.querySelector('#addForm');
 const editForm = document.querySelector('#editForm')
-const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')//* imagePopupCloseButton
+const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')
 const imagePopup = document.querySelector('.popup_image');
 const descriptionCardPopup = document.querySelector('.popup__description')
 const imageCardPopup = document.querySelector('.popup__image')
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
-const buttonSubmitEditPopup = document.querySelector('#addSubmit')//нйти кнопку сабмита едит попапа
-const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')//найти кнопку сабмита попапа добавления карточки
+const buttonSubmitEditPopup = document.querySelector('#addSubmit')
+const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
 function open(popupName){
   popupName.classList.add('popup_opened');
-  //добавить слушатель 
   document.addEventListener('keydown', closingByEsc);
 }
 function close(popupName){
   popupName.classList.remove('popup_opened')
-  //удалить слушатель
   document.removeEventListener('keydown', closingByEsc);
 }
-//*Закрытие попапа по клику на оверлей
 function closeOverlay (hideOverlayName,nameOverlay){
   hideOverlayName.addEventListener('click', function(){
   close(nameOverlay)
 })}
-//*  Закрытие попапа на клавишу ESC
 function closingByEsc(evt){
     if (evt.key === 'Escape'){
       const openedPopup = document.querySelector('.popup_opened');
       close(openedPopup);
     }
   }
-//функция создания карточки и установки слушателей
-function createElement(element){
-  const elementTemplate = document.getElementById('elementTemplate').content.firstElementChild.cloneNode(true)
-  const elementTitle = elementTemplate.querySelector('.element__title');
-  const elementImage = elementTemplate.querySelector('.element__image');
-  elementTitle.textContent = element.name;
-  elementImage.setAttribute('src', element.image);
-  elementImage.setAttribute('alt', 'изображение карточки');
-  elementImage.addEventListener('click', function(){
-  imageCardPopup.setAttribute('src', element.image);
-  imageCardPopup.setAttribute('alt', 'изображение карточки');
-  descriptionCardPopup.textContent = element.name
-  open(imagePopup)
-  })
-  const deleteButton = elementTemplate.querySelector('.element__trash')
-  const likeButton = elementTemplate.querySelector('.element__like')
-  likeButton.addEventListener('click', handleLikeButtonClick)
-  deleteButton.addEventListener('click', handleDeleteButtonClick) 
-  return elementTemplate;
-}
-//функция добавления карточки в разметку
-function addCard(element){
-  elements.prepend(createElement(element));
-}
-//добавить все карточки в разметку
-initialElements.forEach(addCard);
 
 editButton.addEventListener('click', function openEditPopup(){
   open(editPopup)
@@ -113,18 +85,6 @@ function handleAddSubmit(evt) {
   close(addPopup)
 }
 addForm.addEventListener('submit', handleAddSubmit);
-//*Удалить карточку
-function handleDeleteButtonClick(evt){
-  const deleteButton = evt.target
-  const element = deleteButton.closest('.element')
-  element.remove();
-}
-//* Поставить лайк
-function handleLikeButtonClick(evt){
-  const likeButton = evt.target
-  const element = likeButton.closest('.element')
-  likeButton.classList.toggle('element__like_active')
-}
 //* Закрытие попапа просмотра фотографии
 buttonCloseImagePopup.addEventListener('click', function(){
   close(imagePopup)
