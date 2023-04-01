@@ -10,24 +10,22 @@ const userName = document.querySelector('#userName');
 const userOccupation = document.querySelector('#userOccupation');
 const nameInput = document.querySelector('#userNameInput');
 const occupationInput = document.querySelector('#userOccupationInput');
-const elements = document.querySelector('.elements')
 const cardImageInput = document.querySelector('#cardImageInput')
 const cardNameInput = document.querySelector('#cardNameInput');
 const addForm = document.querySelector('#addForm');
 const editForm = document.querySelector('#editForm')
 const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')
 const imagePopup = document.querySelector('.popup_image');
-const descriptionCardPopup = document.querySelector('.popup__description')
-const imageCardPopup = document.querySelector('.popup__image')
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
 const buttonSubmitEditPopup = document.querySelector('#addSubmit')
 const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
-function open(popupName){
+export function open(popupName){
   popupName.classList.add('popup_opened');
   document.addEventListener('keydown', closingByEsc);
 }
+
 function close(popupName){
   popupName.classList.remove('popup_opened')
   document.removeEventListener('keydown', closingByEsc);
@@ -81,7 +79,9 @@ function handleAddSubmit(evt) {
     name: cardNameInput.value,
     image: cardImageInput.value,
   }
-  addCard(newCard);
+  const card = new Card(newCard, '#elementTemplate');
+  const item = card.generateCard();
+  document.querySelector('.elements').prepend(item);
   close(addPopup)
 }
 addForm.addEventListener('submit', handleAddSubmit);

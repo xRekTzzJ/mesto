@@ -1,3 +1,4 @@
+import {open} from './index.js'
 const data = [
     {
       name: 'Санкт-Петербург',
@@ -61,6 +62,13 @@ export class Card {
     }
 
     _handeOpenPopupCardImage(){
+      const descriptionCardPopup = document.querySelector('.popup__description');
+      const imageCardPopup = document.querySelector('.popup__image');
+      const imagePopup = document.querySelector('.popup_image');
+      imageCardPopup.src = this._image;
+      imageCardPopup.alt = this._name;
+      descriptionCardPopup.textContent = this._name;
+      open(imagePopup);
     }
 
 
