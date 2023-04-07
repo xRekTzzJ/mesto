@@ -48,12 +48,12 @@ editButton.addEventListener('click', function openEditPopup(){
   openPopup(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
-  formValidator._enableButton(buttonSubmitEditPopup);
+  editFormValidator.resetValidation(editForm);
 });
 addButton.addEventListener('click', function openAddPopup(){
   openPopup(addPopup)
   addForm.reset();
-  formValidator._disableButton(buttonSubmitAddPopup);
+  addFormValidator.resetValidation(addForm);
 });
 
 //* Закрытие едит попапа
@@ -91,8 +91,14 @@ const validationConfig = {
   inactiveSubmitButtonClass: 'popup__submit-button_inactive',
 }
 
-const formValidator =  new FormValidator(validationConfig);
-formValidator.enableValidation();
+
+  const addFormValidator =  new FormValidator(validationConfig, addForm);
+  addFormValidator.enableValidation();
+  
+  const editFormValidator =  new FormValidator(validationConfig, editForm);
+  editFormValidator.enableValidation();
+
+
 
 export const data = [
   {
