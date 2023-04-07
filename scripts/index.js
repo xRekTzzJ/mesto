@@ -1,5 +1,5 @@
 import {Card} from './Card.js'
-
+import {FormValidator} from './FormValidator.js'
 const editPopup = document.querySelector('#editPopup');
 const addPopup = document.querySelector('#addPopup');
 const addButton = document.querySelector('#addButton');
@@ -15,48 +15,50 @@ const cardNameInput = document.querySelector('#cardNameInput');
 const addForm = document.querySelector('#addForm');
 const editForm = document.querySelector('#editForm')
 const buttonCloseImagePopup= document.querySelector('#imagePopupCloseButton')
-const imagePopup = document.querySelector('.popup_image');
+export const imagePopup = document.querySelector('.popup_image');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
 const buttonSubmitEditPopup = document.querySelector('#addSubmit')
 const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
-export function open(popupName){
+const elements = document.querySelector('.elements');
+export const descriptionCardPopup = document.querySelector('.popup__description');
+export const imageCardPopup = document.querySelector('.popup__image');
+export function openPopup(popupName){
   popupName.classList.add('popup_opened');
-  document.addEventListener('keydown', closingByEsc);
+  document.addEventListener('keydown', handleCloseByEsc);
 }
 
-function close(popupName){
+function closePopup(popupName){
   popupName.classList.remove('popup_opened')
-  document.removeEventListener('keydown', closingByEsc);
+  document.removeEventListener('keydown', handleCloseByEsc);
 }
 function closeOverlay (hideOverlayName,nameOverlay){
   hideOverlayName.addEventListener('click', function(){
-  close(nameOverlay)
+    closePopup(nameOverlay)
 })}
-function closingByEsc(evt){
+function handleCloseByEsc(evt){
     if (evt.key === 'Escape'){
       const openedPopup = document.querySelector('.popup_opened');
-      close(openedPopup);
+      closePopup(openedPopup);
     }
   }
 
 editButton.addEventListener('click', function openEditPopup(){
-  open(editPopup)
+  openPopup(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
-  enableButton(buttonSubmitEditPopup, validationConfig)
+  formValidator._enableButton(buttonSubmitEditPopup);
 });
 addButton.addEventListener('click', function openAddPopup(){
-  open(addPopup)
-  cardNameInput.value='';
-  cardImageInput.value='';
-  disableButton(buttonSubmitAddPopup, validationConfig)
+  openPopup(addPopup)
+  addForm.reset();
+  formValidator._disableButton(buttonSubmitAddPopup);
 });
 
 //* Закрытие едит попапа
 buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
-  close(editPopup)
+  closePopup(editPopup)
 });
 closeOverlay(overlayHiddenPopupEdit, editPopup);
 //* Изменение имени и статуса пользователя через формы
@@ -64,14 +66,72 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userOccupation.textContent = occupationInput.value;
-  close(editPopup);
+  closePopup(editPopup);
 }
 editForm.addEventListener('submit', handleFormSubmit);
 //*Закрытие попапа добавления карточек
 buttonCloseAddPopup.addEventListener('click', function() {
-  close(addPopup)
+  closePopup(addPopup)
 });
 closeOverlay(overlayHiddenPopupAdd, addPopup);
+//* Закрытие попапа просмотра фотографии
+buttonCloseImagePopup.addEventListener('click', function(){
+  closePopup(imagePopup)
+})
+closeOverlay(overlayHiddenPopupimage, imagePopup);
+
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  errorClassTemplate: '.popup__input-error_type_',
+  activeErrorClass: 'popup__input-error_active',
+  activeErrorInputClass: 'popup__input_error',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveSubmitButtonClass: 'popup__submit-button_inactive',
+}
+
+const formValidator =  new FormValidator(validationConfig);
+formValidator.enableValidation();
+
+export const data = [
+  {
+    name: 'Санкт-Петербург',
+    image: 'https://images.unsplash.com/photo-1597533849860-5a04a21a7b3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80'
+  },
+  {
+    name: 'Москва',
+    image: 'https://images.unsplash.com/photo-1541447271487-09612b3f49f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+  },
+  {
+    name: 'Иваново',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Калиниград',
+    image: 'https://images.unsplash.com/photo-1642106077494-4e4e776152c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'
+  },
+  {
+    name: 'Северобайкальск',
+    image: 'https://images.unsplash.com/photo-1587053362230-eb9a377641ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80'
+  },
+  {
+    name: 'Байкал',
+    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
+
+
+const element = (elementType) => {
+  const card = new Card(elementType, '#elementTemplate');
+  const item = card.generateCard();
+  elements.prepend(item);
+}
+
+data.forEach((cardElement) => {
+  element(cardElement);
+})
+
 //* Добавления карточки по нажатию кнопки 'Сохранить'
 function handleAddSubmit(evt) {
   evt.preventDefault();
@@ -79,14 +139,7 @@ function handleAddSubmit(evt) {
     name: cardNameInput.value,
     image: cardImageInput.value,
   }
-  const card = new Card(newCard, '#elementTemplate');
-  const item = card.generateCard();
-  document.querySelector('.elements').prepend(item);
-  close(addPopup)
+  element(newCard);
+  closePopup(addPopup)
 }
 addForm.addEventListener('submit', handleAddSubmit);
-//* Закрытие попапа просмотра фотографии
-buttonCloseImagePopup.addEventListener('click', function(){
-  close(imagePopup)
-})
-closeOverlay(overlayHiddenPopupimage, imagePopup);
