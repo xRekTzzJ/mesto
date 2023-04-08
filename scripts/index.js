@@ -19,9 +19,9 @@ export const imagePopup = document.querySelector('.popup_image');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
-const buttonSubmitEditPopup = document.querySelector('#addSubmit')
-const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
-const elements = document.querySelector('.elements');
+//const buttonSubmitEditPopup = document.querySelector('#addSubmit')
+//const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
+const cardsContainer = document.querySelector('.elements');
 export const descriptionCardPopup = document.querySelector('.popup__description');
 export const imageCardPopup = document.querySelector('.popup__image');
 export function openPopup(popupName){
@@ -48,12 +48,12 @@ editButton.addEventListener('click', function openEditPopup(){
   openPopup(editPopup)
   nameInput.value = userName.textContent;
   occupationInput.value = userOccupation.textContent;
-  editFormValidator.resetValidation(editForm);
+  editFormValidator.resetValidation();
 });
 addButton.addEventListener('click', function openAddPopup(){
   openPopup(addPopup)
   addForm.reset();
-  addFormValidator.resetValidation(addForm);
+  addFormValidator.resetValidation();
 });
 
 //* Закрытие едит попапа
@@ -62,13 +62,13 @@ buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
 });
 closeOverlay(overlayHiddenPopupEdit, editPopup);
 //* Изменение имени и статуса пользователя через формы
-function handleFormSubmit(evt) {
+function handleFormSubmitEditPopup(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userOccupation.textContent = occupationInput.value;
   closePopup(editPopup);
 }
-editForm.addEventListener('submit', handleFormSubmit);
+editForm.addEventListener('submit', handleFormSubmitEditPopup);
 //*Закрытие попапа добавления карточек
 buttonCloseAddPopup.addEventListener('click', function() {
   closePopup(addPopup)
@@ -128,14 +128,20 @@ export const data = [
 ]; 
 
 
-const element = (elementType) => {
+const createElement = (elementType) => {
   const card = new Card(elementType, '#elementTemplate');
   const item = card.generateCard();
-  elements.prepend(item);
+  return item;
+
+}
+
+const renderCard = (item) => {
+  cardsContainer.prepend(item);
 }
 
 data.forEach((cardElement) => {
-  element(cardElement);
+  const cardItem = createElement(cardElement);
+  renderCard(cardItem);
 })
 
 //* Добавления карточки по нажатию кнопки 'Сохранить'
@@ -145,7 +151,8 @@ function handleAddSubmit(evt) {
     name: cardNameInput.value,
     image: cardImageInput.value,
   }
-  element(newCard);
+  const cardItem = createElement(newCard);
+  renderCard(cardItem);
   closePopup(addPopup)
 }
 addForm.addEventListener('submit', handleAddSubmit);
