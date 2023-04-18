@@ -1,5 +1,6 @@
 import {Card} from '../components/Card.js'
 import {FormValidator} from '../components/FormValidator.js'
+import { PopupWithImage } from '../components/PopupWithImage.js';
 const editPopup = document.querySelector('#editPopup');
 const addPopup = document.querySelector('#addPopup');
 const addButton = document.querySelector('#addButton');
@@ -19,11 +20,16 @@ export const imagePopup = document.querySelector('.popup_image');
 const overlayHiddenPopupAdd = document.querySelector('#hideOverlayAddPopup')
 const overlayHiddenPopupimage = document.querySelector('#hideOverlayImagePopup')
 const overlayHiddenPopupEdit = document.querySelector('#hideOverlayEditPopup')
-//const buttonSubmitEditPopup = document.querySelector('#addSubmit')
-//const buttonSubmitAddPopup = document.querySelector('#addCardSubmit')
 const cardsContainer = document.querySelector('.elements');
 export const descriptionCardPopup = document.querySelector('.popup__description');
 export const imageCardPopup = document.querySelector('.popup__image');
+
+// 
+export const popupWithImage = new PopupWithImage('.popup_image');
+
+
+
+// 
 export function openPopup(popupName){
   popupName.classList.add('popup_opened');
   document.addEventListener('keydown', handleCloseByEsc);

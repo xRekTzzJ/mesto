@@ -1,6 +1,7 @@
-import {openPopup, imagePopup, descriptionCardPopup, imageCardPopup} from '../pages/index.js'; 
+import {popupWithImage} from '../pages/index.js'; 
 export class Card {
     constructor(data, cardTemplateSelector){
+        this._data = data;
         this._name = data.name;
         this._image = data.image;
         this._cardTemplateSelector =  cardTemplateSelector;
@@ -36,10 +37,7 @@ export class Card {
     }
 
     _handeOpenPopupCardImage(){
-      imageCardPopup.src = this._image;
-      imageCardPopup.alt = this._name;
-      descriptionCardPopup.textContent = this._name;
-      openPopup(imagePopup);
+      popupWithImage.open(this._name, this._image);
     }
 
 
