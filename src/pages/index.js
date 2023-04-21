@@ -1,5 +1,8 @@
-import {Card} from '../components/Card.js'
+import {Card} from '../components/Card.js';
+import {Section} from '../components/Section.js';
+import { Popup, UserInfo } from '../components/Popup.js';
 import {FormValidator} from '../components/FormValidator.js'
+import { PopupWithForm } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 const editPopup = document.querySelector('#editPopup');
 const addPopup = document.querySelector('#addPopup');
@@ -25,66 +28,49 @@ export const descriptionCardPopup = document.querySelector('.popup__description'
 export const imageCardPopup = document.querySelector('.popup__image');
 
 // 
+const popupUser = new Popup('.popup_profile');
+popupUser.setEventListeners();
+
 export const popupWithImage = new PopupWithImage('.popup_image');
+popupWithImage.setEventListeners();
+
+const popupAddCard = new Popup('.popup_cards');
+popupAddCard.setEventListeners();
+
+const profileInfo = new UserInfo(userName, userOccupation);
 
 
 
-// 
-export function openPopup(popupName){
-  popupName.classList.add('popup_opened');
-  document.addEventListener('keydown', handleCloseByEsc);
-}
 
-function closePopup(popupName){
-  popupName.classList.remove('popup_opened')
-  document.removeEventListener('keydown', handleCloseByEsc);
-}
-function closeOverlay (hideOverlayName,nameOverlay){
-  hideOverlayName.addEventListener('click', function(){
-    closePopup(nameOverlay)
-})}
-function handleCloseByEsc(evt){
-    if (evt.key === 'Escape'){
-      const openedPopup = document.querySelector('.popup_opened');
-      closePopup(openedPopup);
-    }
-  }
 
-editButton.addEventListener('click', function openEditPopup(){
-  openPopup(editPopup)
-  nameInput.value = userName.textContent;
-  occupationInput.value = userOccupation.textContent;
+
+
+editButton.addEventListener('click', () => {
+  popupUser.open();
+  const {name, occupation} = profileInfo.getUserInfo();
+  nameInput.value = name;
+  occupationInput.value = occupation;
   editFormValidator.resetValidation();
+} 
+);
+
+
+const popupWithProfileForm = new PopupWithForm({
+  popupSelector: '.popup_profile',
+  handleFormSubmit: ({ name, occupation }) => {
+    profileInfo.setUserInfo(name, occupation);
+  },
 });
-addButton.addEventListener('click', function openAddPopup(){
-  openPopup(addPopup)
+popupWithProfileForm.setEventListeners();
+
+
+addButton.addEventListener('click', () => {
+  popupAddCard.open();
   addForm.reset();
   addFormValidator.resetValidation();
 });
 
-//* Закрытие едит попапа
-buttonClosePopupProfile.addEventListener('click', function closeEditPopup() {
-  closePopup(editPopup)
-});
-closeOverlay(overlayHiddenPopupEdit, editPopup);
-//* Изменение имени и статуса пользователя через формы
-function handleFormSubmitEditPopup(evt) {
-  evt.preventDefault();
-  userName.textContent = nameInput.value;
-  userOccupation.textContent = occupationInput.value;
-  closePopup(editPopup);
-}
-editForm.addEventListener('submit', handleFormSubmitEditPopup);
-//*Закрытие попапа добавления карточек
-buttonCloseAddPopup.addEventListener('click', function() {
-  closePopup(addPopup)
-});
-closeOverlay(overlayHiddenPopupAdd, addPopup);
-//* Закрытие попапа просмотра фотографии
-buttonCloseImagePopup.addEventListener('click', function(){
-  closePopup(imagePopup)
-})
-closeOverlay(overlayHiddenPopupimage, imagePopup);
+
 
 
 const validationConfig = {
@@ -161,4 +147,3 @@ function handleAddSubmit(evt) {
   renderCard(cardItem);
   closePopup(addPopup)
 }
-addForm.addEventListener('submit', handleAddSubmit);
