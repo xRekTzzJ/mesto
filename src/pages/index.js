@@ -54,7 +54,7 @@ addButton.addEventListener('click', () => {
 
 const addCardFromAddPopup = new PopupWithForm({
   popupSelector: '.popup_cards',
-  handleFormSubmit: (formValues) => {
+  handleFormSubmit: () => {
     const card = new Card({name: cardNameInput.value, image: cardImageInput.value}, '#elementTemplate');
     addStartCard.additem(card.generateCard());
   }
