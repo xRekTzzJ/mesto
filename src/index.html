@@ -2,19 +2,17 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <script src="./pages/index.js" type="module" defer></script>
   </head>
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/logo.svg" alt="Логотип 'Mesto'." class="header__logo" />
+        <img src="<%=require('./images/logo.svg')%>" alt="Логотип 'Mesto'." class="header__logo" />
       </header>
       <main class="main">
         <section class="profile">
-          <img src="./images/avatar.png" alt="Изображение профиля." class="profile__avatar" />
+          <img alt="Изображение профиля." src="<%=require('./images/avatar.png')%>" class="profile__avatar" />
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 id="userName" class="profile__name">Павел Попов</h1>

@@ -21,6 +21,7 @@ import {
   imageCardPopup, 
   data, 
   validationConfig} from '../utils/constants.js'
+  import './index.css';
 //попап изменения информации 
 const popupUser = new Popup('.popup_profile');
 //попап просмотра изображения
