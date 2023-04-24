@@ -1,10 +1,10 @@
-import {popupWithImage} from '../pages/index.js'; 
 export class Card {
-    constructor(data, cardTemplateSelector){
+    constructor(data, cardTemplateSelector, handleCardClick){
         this._data = data;
         this._name = data.name;
         this._image = data.image;
         this._cardTemplateSelector =  cardTemplateSelector;
+        this._handleCardClick = handleCardClick;
     }
     _getTemplate(){
             const cardElement = document
@@ -23,7 +23,7 @@ export class Card {
             this._handleDeleteCard();
         })
         this._cardPicture.addEventListener('click', () => {
-            this._handeOpenPopupCardImage();
+            this._handleCardClick(this._name, this._image);
         })
     }
 
@@ -34,10 +34,6 @@ export class Card {
     _handleDeleteCard(){
         this._element.remove();
         this._element = null;
-    }
-
-    _handeOpenPopupCardImage(){
-      popupWithImage.open(this._name, this._image);
     }
 
 
