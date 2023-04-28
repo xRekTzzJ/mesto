@@ -22,11 +22,11 @@ import {
   data, 
   validationConfig} from '../utils/constants.js'
   import './index.css';
-// 
+
 const handleCardClick = function (name, image) {
   popupWithImage.open(name, image);
 }
-// 
+
 const createCard = (cardData) => {
   const card = new Card(cardData, '#elementTemplate', handleCardClick);
   return card.generateCard();
@@ -59,14 +59,11 @@ editButton.addEventListener('click', () => {
 } 
 );
 
-
 addButton.addEventListener('click', () => {
   popupAddCard.open();
   addForm.reset();
   addFormValidator.resetValidation();
 });
-
-
 
 const cardsList = new Section({
   items: data,
