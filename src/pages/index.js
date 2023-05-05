@@ -5,6 +5,7 @@ import {FormValidator} from '../components/FormValidator.js'
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { Api } from '../components/Api.js';
 import {
   addButton, 
   editButton, 
@@ -19,7 +20,6 @@ import {
   imagePopup, 
   descriptionCardPopup, 
   imageCardPopup, 
-  data, 
   validationConfig} from '../utils/constants.js'
   import './index.css';
 
@@ -28,9 +28,15 @@ const handleCardClick = function (name, image) {
 }
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, '#elementTemplate', handleCardClick);
+  const card = new Card(
+    cardData,
+     '#elementTemplate',
+      handleCardClick,
+       profileInfo._id);
   return card.generateCard();
 }
+
+
 //попап изменения информации юзера
   const popupUser = new PopupWithForm({
     popupSelector: '.popup_profile',
@@ -66,7 +72,7 @@ addButton.addEventListener('click', () => {
 });
 
 const cardsList = new Section({
-  items: data,
+  items: [],
   renderer: (data) => {
     cardsList.additem(createCard(data))
   }
@@ -80,3 +86,23 @@ popupAddCard.setEventListeners();
 cardsList.renderItems();
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+
+
+const api = new Api({
+  baseLink: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  headers: {
+    authorization: 'c98a00a2-a85b-402f-9bf1-d69533bde120',
+    "content-type": "application/json"
+  }
+});
+//получение данных с сервера
+const getUserInfoFromServer = api.getUserInfo();
+const getCardsFromServer = api.getInitialCards();
+
+Promise.all([getUserInfoFromServer, getCardsFromServer]).then(([userData, initialCards]) => {
+  profileInfo.setUserInfo(userData);
+  initialCards.forEach((card) => {
+    cardsList.additem(createCard(card)
+    )
+  })
+}).catch((err) => console.error(`Ошибка загрузки данных: ${err}`))

@@ -1,10 +1,12 @@
 export class Card {
-    constructor(data, cardTemplateSelector, handleCardClick){
+    constructor(data, cardTemplateSelector, handleCardClick, profileId){
         this._data = data;
         this._name = data.name;
-        this._image = data.image;
+        this._image = data.link;
         this._cardTemplateSelector =  cardTemplateSelector;
         this._handleCardClick = handleCardClick;
+        this._id = data._id;
+        this._profileId = profileId;
     }
     _getTemplate(){
             const cardElement = document

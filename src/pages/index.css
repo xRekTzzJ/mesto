@@ -42,3 +42,6 @@
 @import url(../blocks/popup/__input/_error/popup__input_error.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__hide-overlay/popup__hide-overlay.css);
+.popup__submit-button_сonfrim{
+    margin: 38px 0 36px;
+}

@@ -3,6 +3,7 @@ export class UserInfo {
     constructor(profileNameSelector, profileOccupationSelector){
         this._name = profileNameSelector;
         this._userOccupation = profileOccupationSelector;
+        //avatar selector
     }
     getUserInfo(){
         return {
@@ -10,8 +11,9 @@ export class UserInfo {
             occupation: this._userOccupation.textContent,
         };
     }
-    setUserInfo(name, occupation) {
-        this._name.textContent = name;
-        this._userOccupation.textContent = occupation;
+    setUserInfo(userData) {
+        this._id = userData._id;
+        this._name.textContent = userData.name;
+        this._userOccupation.textContent = userData.about;
     }
 }
