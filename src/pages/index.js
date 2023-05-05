@@ -25,9 +25,56 @@ import {
   avatar,
   buttonEditAvatar,
   avatarForm,
-avatarInput} from '../utils/constants.js'
+  avatarInput} from '../utils/constants.js'
   import './index.css';
-import { data } from 'autoprefixer';
+  import { data } from 'autoprefixer';
+
+const api = new Api({
+    baseLink: 'https://mesto.nomoreparties.co/v1/cohort-65',
+    headers: {
+      authorization: 'c98a00a2-a85b-402f-9bf1-d69533bde120',
+      "content-type": "application/json"
+    }
+  });
+
+//получение данных с сервера
+const getUserInfoFromServer = api.getUserInfo();
+const getCardsFromServer = api.getInitialCards();
+
+Promise.all([getUserInfoFromServer, getCardsFromServer]).then(([userData, initialCards]) => {
+  profileInfo.setUserInfo(userData);
+  profileInfo.setUserAvatar(userData.avatar)
+  initialCards.forEach((card) => {
+    cardsList.additem(createCard(card)
+    )
+  })
+}).catch((err) => console.error(`Ошибка загрузки данных: ${err}`))
+
+//попап изменения информации юзера
+const popupUser = new PopupWithForm({
+  popupSelector: '.popup_profile',
+  handleFormSubmit: handleSubmitProfileForm,
+});
+
+//попап просмотра изображения
+export const popupWithImage = new PopupWithImage('.popup_image');
+
+// попап добавления карточки
+const popupAddCard = new PopupWithForm({
+  popupSelector: '.popup_cards',
+  handleFormSubmit: handleSubmitAddCardForm
+})
+
+// попап подтверждения удаления карточки
+const popupConfirm = new PopupWithConfirm('.popup_confirm', handleSubmitDeleteForm)
+
+// попап изменения аватара
+const popupAvatar = new PopupWithForm({
+  popupSelector: '.popup_avatar',
+  handleFormSubmit: handleSubmitAvatarForm
+})
+//данные о профиле из DOM
+const profileInfo = new UserInfo(userName, userOccupation, avatar);
 
 const handleCardClick = function (name, image) {
   popupWithImage.open(name, image);
@@ -44,21 +91,6 @@ const createCard = (cardData) => {
   return card.generateCard();
 }
 
-
-//попап изменения информации юзера
-  const popupUser = new PopupWithForm({
-    popupSelector: '.popup_profile',
-    handleFormSubmit: handleSubmitProfileForm,
-  });
-//попап просмотра изображения
-export const popupWithImage = new PopupWithImage('.popup_image');
-// попап добавления карточки
-const popupAddCard = new PopupWithForm({
-  popupSelector: '.popup_cards',
-  handleFormSubmit: handleSubmitAddCardForm
-})
-
-const profileInfo = new UserInfo(userName, userOccupation, avatar);
 //открытие попапа изменения информации о юзере и наполнение полей
 editButton.addEventListener('click', () => {
   popupUser.open();
@@ -81,48 +113,12 @@ const cardsList = new Section({
     cardsList.additem(createCard(data))
   }
 }, '.elements')
-const addFormValidator =  new FormValidator(validationConfig, addForm);
-const avatarFormValidator =  new FormValidator(validationConfig, avatarForm);
-const editFormValidator =  new FormValidator(validationConfig, editForm);
 
-popupUser.setEventListeners();
-popupWithImage.setEventListeners();
-popupAddCard.setEventListeners(); 
-cardsList.renderItems();
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-avatarFormValidator.enableValidation();
-
-
-const api = new Api({
-  baseLink: 'https://mesto.nomoreparties.co/v1/cohort-65',
-  headers: {
-    authorization: 'c98a00a2-a85b-402f-9bf1-d69533bde120',
-    "content-type": "application/json"
-  }
-});
-//получение данных с сервера
-const getUserInfoFromServer = api.getUserInfo();
-const getCardsFromServer = api.getInitialCards();
-
-Promise.all([getUserInfoFromServer, getCardsFromServer]).then(([userData, initialCards]) => {
-  profileInfo.setUserInfo(userData);
-  profileInfo.setUserAvatar(userData.avatar)
-  initialCards.forEach((card) => {
-    cardsList.additem(createCard(card)
-    )
-  })
-}).catch((err) => console.error(`Ошибка загрузки данных: ${err}`))
-const popupAvatar = new PopupWithForm({
-  popupSelector: '.popup_avatar',
-  handleFormSubmit: handleSubmitAvatarForm
-})
 buttonEditAvatar.addEventListener('click',() =>  {
   popupAvatar.open();
   avatarFormValidator.resetValidation();})
 popupAvatar.setEventListeners();
-// 
-const popupConfirm = new PopupWithConfirm('.popup_confirm', handleSubmitDeleteForm)
+
 
 function handleSubmitDeleteForm(card){
   api.deleteCard(card._id)
@@ -133,7 +129,6 @@ function handleSubmitDeleteForm(card){
   .catch((err) => console.error(`Ошибка: ${err}`))
 }
 
-
 function handleDeleteCardClick(card){
   popupConfirm.open();
   popupConfirm.changeHandleSubmitForm(() => {
@@ -141,22 +136,27 @@ function handleDeleteCardClick(card){
   })
 }
 
-
 function handleSubmitAddCardForm(data){
+  popupAddCard.changeButtonText('Сохранение...')
   const cardData = {
     name: cardNameInput.value,
     link: cardImageInput.value}
     api.createCard(cardData)
     .then((card) => cardsList.additem(createCard(card)))
-    popupAddCard.close()
+    .then(popupAddCard.close())
+    .catch((err) => console.error(`Ошибка: ${err}`))
+    .finally(popupAddCard.changeButtonText('Сохранить'))
   };
 
   function handleSubmitProfileForm(data){
+    popupUser.changeButtonText('Сохранение...')
     api.updateUserInfo({name: nameInput.value, about: occupationInput.value})
     .then((userData) => {
       profileInfo.setUserInfo(userData);
-      popupUser.close()
     })
+    .then(popupUser.close())
+    .catch((err) => {console.error(`Ошибка: ${err}`)})
+    .finally(popupUser.changeButtonText('Сохранить'))
   }
 
   function handleLikeCardClick(card){
@@ -177,13 +177,25 @@ function handleSubmitAddCardForm(data){
     }
   }
 
-  popupConfirm.setEventListeners();
-
   function handleSubmitAvatarForm(data){
+    popupAvatar.changeButtonText('Сохранение...')
     api.editProfileAvatar({link: avatarInput.value})
     .then((data) => {
       profileInfo.setUserAvatar(data.avatar);
-      popupAvatar.close();
     })
+    .then(popupAvatar.close())
     .catch((err) => {console.error(`Ошибка: ${err}`)})
+    .finally(popupAvatar.changeButtonText('Сохранить'))
   }
+
+  const addFormValidator =  new FormValidator(validationConfig, addForm);
+  const avatarFormValidator =  new FormValidator(validationConfig, avatarForm);
+  const editFormValidator =  new FormValidator(validationConfig, editForm);
+  popupUser.setEventListeners();
+  popupWithImage.setEventListeners();
+  popupAddCard.setEventListeners(); 
+  popupConfirm.setEventListeners();
+  editFormValidator.enableValidation();
+  addFormValidator.enableValidation();
+  avatarFormValidator.enableValidation();
+  cardsList.renderItems();
