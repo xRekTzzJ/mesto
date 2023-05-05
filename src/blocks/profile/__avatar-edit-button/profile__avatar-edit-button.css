@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,6 +11,5 @@
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.8);
     cursor: pointer;
-    display: block;
     display: none;
 }
