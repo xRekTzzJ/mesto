@@ -47,17 +47,27 @@ export class Api {
         }).then(this._handleResponse)
     }
     likeCard(id){
-        const url = `${this._baseLink}cards/${id}/likes`;
+        const url = `${this._baseLink}/cards/${id}/likes`;
         return fetch(url, {
             method: "PUT",
             headers: this._headers,
         }).then(this._handleResponse)
     }
     deleteLike(id){
-        const url = `${this._baseLink}cards/${id}/likes`;
+        const url = `${this._baseLink}/cards/${id}/likes`;
         return fetch(url, {
             method: "DELETE",
             headers: this._headers,
+        }).then(this._handleResponse)
+    }
+    editProfileAvatar({link}){
+        const url = `${this._baseLink}/users/me/avatar`;
+        return fetch(url, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: link
+              }),
         }).then(this._handleResponse)
     }
 }

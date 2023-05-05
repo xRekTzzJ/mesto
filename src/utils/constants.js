@@ -20,5 +20,7 @@ export const validationConfig = {
     submitButtonSelector: '.popup__submit-button',
     inactiveSubmitButtonClass: 'popup__submit-button_inactive',
   };
-  export const avatar = document.querySelector('.profile__avatar');
-  export const buttonEditAvatar = document.querySelector('.profile__avatar-edit-button')
+export const avatarForm = document.querySelector('.popup__form-avatar')
+export const avatar = document.querySelector('.profile__avatar');
+export const buttonEditAvatar = document.querySelector('.profile__avatar-edit-button');
+export const avatarInput = document.querySelector('.popup__input-avatar')

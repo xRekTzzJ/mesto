@@ -162,7 +162,8 @@
           <h2 class="popup__description"></h2>
         </div>
       </div>
-      <div class="popup popup_form popup_confirm">
+      
+      <div class="popup popup_confirm">
         <div class="popup__hide-overlay" id="hideOverlayImagePopup"></div>
         <div class="popup__container">
           <button
@@ -194,17 +195,17 @@
             id="addPopupCloseButton"
           ></button>
           <h2 class="popup__title">Обновить аватар</h2>
-          <form action="#" class="popup__form popup__form_error" name="popup-from" id="addForm" novalidate>
+          <form action="#" class="popup__form popup__form-avatar popup__form_error" name="popup-from" id="addForm" novalidate>
           <div class="popup__field">
             <input
               id="userAvatarInput"
               type="url"
               placeholder="Ссылка на картинку"
-              class="popup__input"
-              name="link"
+              class="popup__input popup__input-avatar"
+              name="link-avatar"
               required
             />
-            <span class="popup__input-error popup__input-error_type_link">.</span>
+            <span class="popup__input-error popup__input-error_type_link-avatar">.</span>
           </div>
             <button
               type="submit"

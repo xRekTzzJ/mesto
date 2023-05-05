@@ -6,6 +6,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { Api } from '../components/Api.js';
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import {
   addButton, 
   editButton, 
@@ -22,9 +23,11 @@ import {
   imageCardPopup, 
   validationConfig,
   avatar,
-  buttonEditAvatar} from '../utils/constants.js'
+  buttonEditAvatar,
+  avatarForm,
+avatarInput} from '../utils/constants.js'
   import './index.css';
-import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
+import { data } from 'autoprefixer';
 
 const handleCardClick = function (name, image) {
   popupWithImage.open(name, image);
@@ -79,6 +82,7 @@ const cardsList = new Section({
   }
 }, '.elements')
 const addFormValidator =  new FormValidator(validationConfig, addForm);
+const avatarFormValidator =  new FormValidator(validationConfig, avatarForm);
 const editFormValidator =  new FormValidator(validationConfig, editForm);
 
 popupUser.setEventListeners();
@@ -87,6 +91,7 @@ popupAddCard.setEventListeners();
 cardsList.renderItems();
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 
 const api = new Api({
@@ -110,10 +115,11 @@ Promise.all([getUserInfoFromServer, getCardsFromServer]).then(([userData, initia
 }).catch((err) => console.error(`Ошибка загрузки данных: ${err}`))
 const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_avatar',
-  handleFormSubmit: () => {
-  }
+  handleFormSubmit: handleSubmitAvatarForm
 })
-buttonEditAvatar.addEventListener('click',() =>  popupAvatar.open())
+buttonEditAvatar.addEventListener('click',() =>  {
+  popupAvatar.open();
+  avatarFormValidator.resetValidation();})
 popupAvatar.setEventListeners();
 // 
 const popupConfirm = new PopupWithConfirm('.popup_confirm', handleSubmitDeleteForm)
@@ -121,11 +127,12 @@ const popupConfirm = new PopupWithConfirm('.popup_confirm', handleSubmitDeleteFo
 function handleSubmitDeleteForm(card){
   api.deleteCard(card._id)
   .then(() => {
-    card.deleteCard();
+    card.handleDeleteCard();
     popupConfirm.close();
   })
   .catch((err) => console.error(`Ошибка: ${err}`))
 }
+
 
 function handleDeleteCardClick(card){
   popupConfirm.open();
@@ -134,8 +141,6 @@ function handleDeleteCardClick(card){
   })
 }
 
-
-popupConfirm.setEventListeners();
 
 function handleSubmitAddCardForm(data){
   const cardData = {
@@ -159,7 +164,7 @@ function handleSubmitAddCardForm(data){
       api.deleteLike(card._id)
       .then((data) => {
         card.addLikes(data.likes);
-        card.removeLikes()
+        card.removeLike()
       })
       .catch((err) => {console.error(`Ошибка: ${err}`)})
     } else {
@@ -170,4 +175,15 @@ function handleSubmitAddCardForm(data){
       })
       .catch((err) => {console.error(`Ошибка: ${err}`)})
     }
+  }
+
+  popupConfirm.setEventListeners();
+
+  function handleSubmitAvatarForm(data){
+    api.editProfileAvatar({link: avatarInput.value})
+    .then((data) => {
+      profileInfo.setUserAvatar(data.avatar);
+      popupAvatar.close();
+    })
+    .catch((err) => {console.error(`Ошибка: ${err}`)})
   }
