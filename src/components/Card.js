@@ -1,5 +1,5 @@
 export class Card {
-    constructor(data, cardTemplateSelector, handleCardClick, profileId){
+    constructor(data, cardTemplateSelector, handleCardClick, profileId, handleDeleteCardClick, handleLikeCardClick){
         this._data = data;
         this._name = data.name;
         this._image = data.link;
@@ -7,6 +7,8 @@ export class Card {
         this._handleCardClick = handleCardClick;
         this._id = data._id;
         this._profileId = profileId;
+        this._handleDeleteCardClick = handleDeleteCardClick;
+        this._handleLikeCard = handleLikeCardClick;
     }
     _getTemplate(){
             const cardElement = document
@@ -22,7 +24,7 @@ export class Card {
             this._handleCardLike();
         })
         this._wasteBucketButton.addEventListener('click', () => {
-            this._handleDeleteCard();
+            this._handleDeleteCardClick(this);
         })
         this._cardPicture.addEventListener('click', () => {
             this._handleCardClick(this._name, this._image);

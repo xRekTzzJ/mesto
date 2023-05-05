@@ -11,7 +11,7 @@ export const editForm = document.querySelector('#editForm')
 export const imagePopup = document.querySelector('.popup_image');
 export const descriptionCardPopup = document.querySelector('.popup__description');
 export const imageCardPopup = document.querySelector('.popup__image');
-  export const validationConfig = {
+export const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     errorClassTemplate: '.popup__input-error_type_',
@@ -19,4 +19,6 @@ export const imageCardPopup = document.querySelector('.popup__image');
     activeErrorInputClass: 'popup__input_error',
     submitButtonSelector: '.popup__submit-button',
     inactiveSubmitButtonClass: 'popup__submit-button_inactive',
-  }
+  };
+  export const avatar = document.querySelector('.profile__avatar');
+  export const buttonEditAvatar = document.querySelector('.profile__avatar-edit-button')

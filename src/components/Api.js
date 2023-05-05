@@ -26,7 +26,7 @@ export class Api {
     updateUserInfo(user){
         const url = `${this._baseLink}/users/me`;
         return fetch(url, {
-            method: "PATH",
+            method: "PATCH",
             headers: this._headers,
             body: JSON.stringify(user),
         }).then(this._handleResponse)
@@ -37,6 +37,27 @@ export class Api {
             headers: this._headers,
             method: "POST",
             body: JSON.stringify(card),
+        }).then(this._handleResponse)
+    }
+    deleteCard(cardId){
+        const url = `${this._baseLink}/cards/${cardId}`;
+        return fetch(url, {
+            method: "DELETE",
+            headers: this._headers,
+        }).then(this._handleResponse)
+    }
+    likeCard(id){
+        const url = `${this._baseLink}cards/${id}/likes`;
+        return fetch(url, {
+            method: "PUT",
+            headers: this._headers,
+        }).then(this._handleResponse)
+    }
+    deleteLike(id){
+        const url = `${this._baseLink}cards/${id}/likes`;
+        return fetch(url, {
+            method: "DELETE",
+            headers: this._headers,
         }).then(this._handleResponse)
     }
 }
