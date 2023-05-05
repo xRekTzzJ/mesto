@@ -6,7 +6,10 @@
 .header__logo{margin:0;padding:0;width:142px}@media screen and (max-width:620px){.header__logo{margin-left:27px}}@media screen and (max-width:500px){.header__logo{width:103.75px}}
 .main{margin:0;padding:0}
 .profile{align-items:center;display:flex;margin:40px auto 50px;max-width:calc(100% - 400px);padding:0}@media screen and (max-width:1180px){.profile{max-width:calc(100% - 200px)}}@media screen and (max-width:1075px){.profile{max-width:calc(100% - 100px)}}@media screen and (max-width:970px){.profile{max-width:calc(100% - 50px)}}@media screen and (max-width:775px){.profile{flex-direction:column;margin:42px auto 36px;max-width:calc(100% - 38px)}}
-.profile__avatar{border-radius:50%;height:120px;margin:0 30px 0 0;padding:0}@media screen and (max-width:775px){.profile__avatar{margin:0 0 22.5px}}
+.profile__avatar{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;padding:0;width:120px}@media screen and (max-width:775px){.profile__avatar{margin:0 0 22.5px}}
+.profile__avatar-container{align-items:center;border-radius:50%;display:flex;margin:0 30px 0 0;padding:0;position:relative}.profile__avatar-container:hover .profile__avatar-edit-button{display:block}
+.profile__avatar-edit-button{align-items:center;background-color:transparent;background-color:rgba(0,0,0,.8);border:0;border-radius:50%;cursor:pointer;display:flex;display:block;display:none;height:120px;justify-content:center;margin:0;padding:0;position:absolute;width:120px}
+.profile__avatar-edit-button-image{margin:0;padding:0;width:26px}
 .profile__info{color:#fff;display:flex;flex-direction:column;gap:16px;margin:0;padding:0}@media screen and (max-width:775px){.profile__info{gap:14px;margin-bottom:36px}}
 .profile__name-container{align-items:center;display:flex;gap:18px;margin:0;padding:0}@media screen and (max-width:775px){.profile__name-container{gap:10px}}
 .profile__name{display:inline-block;font-size:42px;font-style:normal;font-weight:500;line-height:48px;margin:0;max-width:350px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:450px){.profile__name{font-size:27px;line-height:33px;max-width:200px}}
@@ -21,6 +24,8 @@
 .element__title{display:inline;font-size:24px;font-style:normal;font-weight:900;justify-content:space-between;line-height:29px;margin:0;max-width:190px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}
 .element__like{background-color:transparent;background-image:url(bf45e82757b0b9e50dfb.svg);background-size:cover;border:0;cursor:pointer;height:19px;margin:0;padding:0;transition:.2s;width:22px}.element__like:hover{opacity:.5}
 .element__like_active{background-image:url(fe17a515669479b1e649.svg)}
+.element__like-container{align-items:center;display:flex;flex-direction:column;justify-content:center;margin:0;padding:0}
+.element__like-number{font-size:13px;font-style:normal;font-weight:400;line-height:16px;margin:3px 0 0;max-width:35px;overflow:hidden;padding:0;text-align:center;text-overflow:ellipsis;white-space:nowrap}
 .footer{margin:66px auto 60px;max-width:calc(100% - 400px)}@media screen and (max-width:1180px){.footer{max-width:calc(100% - 200px)}}@media screen and (max-width:1075px){.footer{max-width:calc(100% - 100px)}}@media screen and (max-width:970px){.footer{margin:48px auto 36px;max-width:calc(100% - 50px)}}@media screen and (max-width:775px){.footer{max-width:calc(100% - 38px)}}
 .footer__copy-right{color:#545454;font-size:18px;font-weight:400;line-height:22px;margin:0}@media screen and (max-width:450px){.footer__copy-right{font-size:14px;line-height:17px}}
 .popup{align-items:center;display:flex;height:100%;justify-content:center;left:0;opacity:0;position:fixed;top:0;transition:.3s;visibility:hidden;width:100%;z-index:1}
@@ -42,4 +47,6 @@
 .popup__input_error{border-bottom:1px solid red}
 .popup__field{display:flex;flex-direction:column;margin:0;padding:0}
 .popup__hide-overlay{background-color:#000;height:100%;opacity:0;position:absolute;width:100%;z-index:2}
+.popup_avatar{background-color:rgba(0,0,0,.5)}
+.popup_confirm{background-color:rgba(0,0,0,.5)}
 
