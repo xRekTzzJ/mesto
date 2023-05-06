@@ -12,6 +12,12 @@
   display: inline-block;
 }
 
+@media screen and (max-width: 775px) {
+  .profile__name {
+    margin: 22.5px 0 0;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .profile__name {
     font-size: 27px;

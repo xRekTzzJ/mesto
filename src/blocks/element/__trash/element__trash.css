@@ -10,6 +10,7 @@
     background-color: transparent;
     border: 0;
     transition: .2s;
+    mix-blend-mode: difference;
 }
 .element__trash:hover{
     opacity: .6;
