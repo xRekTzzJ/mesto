@@ -28,7 +28,10 @@ export class Api {
         return fetch(url, {
             method: "PATCH",
             headers: this._headers,
-            body: JSON.stringify(user),
+            body: JSON.stringify({
+                name: user.name,
+                about: user.about
+              }),
         }).then(this._handleResponse)
     }
     createCard(card){

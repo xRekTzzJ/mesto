@@ -45,7 +45,7 @@ Promise.all([getUserInfoFromServer, getCardsFromServer]).then(([userData, initia
   profileInfo.setUserInfo(userData);
   profileInfo.setUserAvatar(userData.avatar)
   initialCards.forEach((card) => {
-    cardsList.additem(createCard(card)
+    cardsList.additem(createCard(card), false
     )
   })
 }).catch((err) => console.error(`Ошибка загрузки данных: ${err}`))
@@ -139,24 +139,26 @@ function handleDeleteCardClick(card){
 function handleSubmitAddCardForm(data){
   popupAddCard.changeButtonText('Сохранение...')
   const cardData = {
-    name: cardNameInput.value,
-    link: cardImageInput.value}
+    name: data["new"],
+    link: data["link"]}
     api.createCard(cardData)
-    .then((card) => cardsList.additem(createCard(card)))
-    .then(popupAddCard.close())
+    .then((card) => {
+      cardsList.additem(createCard(card), true);
+      popupAddCard.close()
+    })
     .catch((err) => console.error(`Ошибка: ${err}`))
-    .finally(popupAddCard.changeButtonText('Сохранить'))
+    .finally(() => {popupAddCard.changeButtonText('Сохранить')})
   };
 
   function handleSubmitProfileForm(data){
     popupUser.changeButtonText('Сохранение...')
-    api.updateUserInfo({name: nameInput.value, about: occupationInput.value})
+    api.updateUserInfo({ name: data["name"], about: data["occupation"]})
     .then((userData) => {
       profileInfo.setUserInfo(userData);
+      popupUser.close()
     })
-    .then(popupUser.close())
     .catch((err) => {console.error(`Ошибка: ${err}`)})
-    .finally(popupUser.changeButtonText('Сохранить'))
+    .finally(() => {popupUser.changeButtonText('Сохранить')})
   }
 
   function handleLikeCardClick(card){
@@ -182,10 +184,10 @@ function handleSubmitAddCardForm(data){
     api.editProfileAvatar({link: avatarInput.value})
     .then((data) => {
       profileInfo.setUserAvatar(data.avatar);
+      popupAvatar.close()
     })
-    .then(popupAvatar.close())
     .catch((err) => {console.error(`Ошибка: ${err}`)})
-    .finally(popupAvatar.changeButtonText('Сохранить'))
+    .finally(() => {popupAvatar.changeButtonText('Сохранить')})
   }
 
   const addFormValidator =  new FormValidator(validationConfig, addForm);

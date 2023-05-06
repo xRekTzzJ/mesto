@@ -9,7 +9,11 @@ export class Section{
             this._renderer(item);
         })
     }
-    additem(element){
-        this._container.prepend(element);
+    additem(element, toTheBeginning = true){
+        if(toTheBeginning){
+            this._container.prepend(element);
+        } else{
+            this._container.append(element);
+        }
     }
 }
